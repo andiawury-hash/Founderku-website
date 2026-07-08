@@ -146,6 +146,7 @@
       <a href="#proses" class="fk-link" style="text-decoration:none; color:inherit;">Proses</a>
       <a href="#proyek" class="fk-link" style="text-decoration:none; color:inherit;">Project</a>
       <a href="#faq" class="fk-link" style="text-decoration:none; color:inherit;">FAQ</a>
+      <a href="#generator" class="fk-link" style="text-decoration:none; color:inherit;">Generator</a>
       <a href="#cta" class="fk-nav-cta" style="text-decoration:none; color:#1C1B33; padding:10px 20px; border-radius:999px; font-weight:600; border:1px solid #1C1B3333;">Ngobrol</a>
     </div>
   </div>
@@ -324,7 +325,7 @@
           </div>
 
           <p style="font-size:16px; line-height:1.7; color:#1C1B3399; margin:0 0 26px;">
-            TukarSkill adalah platform buat saling barter skill &mdash; belajar dari orang lain sambil ngajarin apa yang kamu bisa. Lengkap dengan AI matching, poin &amp; leaderboard, forum diskusi, sampai rating antar user.
+            TukarSkill adalah platform buat saling tukar skill antar sesama. Dari ide, kami bantu bangun identitas brand dan MVP yang siap dicoba user pertama.
           </p>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;">
@@ -333,13 +334,7 @@
             <span class="fk-tag" style="animation-delay:.3s;">Landing Page</span>
           </div>
 
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
-            <div style="font-size:14px; color:#1C1B3399;">Dikerjakan lewat proses 4 langkah Founderku &mdash; dari ngobrol ide sampai produk jalan.</div>
-            <a href="https://tukarskill.com" target="_blank" rel="noopener" class="fk-link" style="text-decoration:none; color:#1C1B33; font-weight:700; font-size:14px; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;">
-              Lihat live di tukarskill.com
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1B33" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-          </div>
+          <div style="font-size:14px; color:#1C1B3399;">Dikerjakan lewat proses 4 langkah Founderku &mdash; dari ngobrol ide sampai produk jalan.</div>
         </div>
       </div>
     </div>
@@ -394,6 +389,195 @@
     </div>
     </div>
   </div>
+
+  <!-- GENERATOR -->
+  <style>
+    .fk-gen-field { font-family:'Manrope',sans-serif; font-size:15px; font-weight:600; color:#1C1B33; background:#FFFCF5; border:1.5px solid #1C1B3326; border-radius:14px; padding:14px 16px; width:100%; box-sizing:border-box; outline:none; transition:border-color .2s ease, box-shadow .2s ease; appearance:none; -webkit-appearance:none; }
+    .fk-gen-field:focus { border-color:#F2A623; box-shadow:0 0 0 3px #F2A62333; }
+    select.fk-gen-field { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231C1B33' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; padding-right:40px; cursor:pointer; }
+    .fk-gen-vibes { display:flex; flex-wrap:wrap; gap:10px; }
+    .fk-gen-vibe { position:relative; cursor:pointer; }
+    .fk-gen-vibe input { position:absolute; opacity:0; pointer-events:none; }
+    .fk-gen-vibe span { display:inline-block; font-family:'Manrope',sans-serif; font-size:14px; font-weight:700; color:#1C1B33; background:#FFFCF5; border:1.5px solid #1C1B3326; border-radius:999px; padding:10px 20px; transition:all .2s ease; }
+    .fk-gen-vibe:hover span { border-color:#1C1B3366; transform:translateY(-1px); }
+    .fk-gen-vibe input:checked + span { background:#1C1B33; color:#FBF6EE; border-color:#1C1B33; box-shadow:0 8px 20px -8px #1C1B3366; }
+    .fk-gen-label { display:block; font-size:13px; font-weight:700; color:#1C1B3399; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; }
+    .fk-gen-result { opacity:0; transform:translateY(18px) rotate(var(--tilt,0deg)); animation:fk-gen-in .55s cubic-bezier(.22,.9,.35,1.2) forwards; border-radius:20px; background:#FFFCF5; box-shadow:0 20px 40px -20px #1C1B3326, 0 4px 12px -4px #1C1B3314; border:1px solid #1C1B3312; padding:30px 26px; display:flex; flex-direction:column; gap:14px; position:relative; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease; }
+    .fk-gen-result:hover { transform:translateY(-4px) rotate(0deg) !important; box-shadow:0 28px 50px -22px #1C1B3340, 0 6px 16px -6px #1C1B331F; }
+    @keyframes fk-gen-in { to { opacity:1; transform:translateY(0) rotate(var(--tilt,0deg)); } }
+    .fk-gen-swatch { width:34px; height:34px; border-radius:10px; border:1.5px solid #1C1B331F; box-shadow:inset 0 0 0 1px #FFFFFF40; }
+    .fk-gen-cta { display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:#FBF6EE; background:linear-gradient(180deg, #2b2a4a, #1C1B33); padding:12px 22px; border-radius:999px; transition:transform .25s ease, box-shadow .25s ease; box-shadow:0 10px 24px -10px #1C1B3355; align-self:flex-start; }
+    .fk-gen-cta:hover { transform:translateY(-2px); box-shadow:0 14px 30px -10px #1C1B3377; }
+    .fk-gen-btn { font-family:'Manrope',sans-serif; cursor:pointer; border:none; }
+    @media (prefers-reduced-motion: reduce) { .fk-gen-result { animation:none; opacity:1; transform:none; } }
+  </style>
+  <div id="generator" class="fk-reveal" style="position:relative; overflow:hidden;">
+    <div class="fk-floating-bg" style="position:absolute; top:60px; right:-120px; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #F2A62355, transparent 70%); filter:blur(10px); pointer-events:none;"></div>
+    <div class="fk-floating-bg fk-float-slow" style="position:absolute; bottom:-80px; left:-100px; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle at 60% 40%, #E15C3E33, transparent 70%); filter:blur(12px); pointer-events:none;"></div>
+    <div style="max-width:1120px; margin:0 auto; padding:100px 26px; position:relative; z-index:1;">
+      <div style="max-width:620px; margin:0 auto 52px; text-align:center;">
+        <div style="font-size:13px; font-weight:700; color:#1C1B3399; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;">Generator</div>
+        <h2 class="fk-section-h2" style="font-family:'Fraunces',serif; font-weight:700; font-size:36px; letter-spacing:-0.015em; margin:0 0 14px; color:#1C1B33;">Coba generate brand kamu</h2>
+        <p style="font-size:16px; line-height:1.6; color:#1C1B3399; margin:0;">Pilih industri, ceritain target user kamu, klik generate. Nama, tagline, sama warna langsung muncul &mdash; gratis, buat pancing ide.</p>
+      </div>
+
+      <div class="fk-glow-card fk-tilt-l" style="max-width:760px; margin:0 auto 44px; border-radius:22px;">
+        <div class="fk-glow-card-inner" style="background:linear-gradient(135deg, #FBE6BA, #FFFCF5); border-radius:20px; padding:40px;">
+          <form id="fk-gen-form" style="display:flex; flex-direction:column; gap:24px;">
+            <div class="fk-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div>
+                <label class="fk-gen-label" for="fk-gen-industri">Industri</label>
+                <select id="fk-gen-industri" class="fk-gen-field">
+                  <option value="edukasi">Edukasi</option>
+                  <option value="kesehatan">Kesehatan</option>
+                  <option value="fnb">F&amp;B</option>
+                  <option value="teknologi">Teknologi / SaaS</option>
+                  <option value="kreatif">Kreatif / Desain</option>
+                  <option value="fashion">Fashion / Lifestyle</option>
+                  <option value="sosial">Sosial / NGO</option>
+                  <option value="finansial">Finansial</option>
+                </select>
+              </div>
+              <div>
+                <label class="fk-gen-label" for="fk-gen-target">Target user kamu</label>
+                <input id="fk-gen-target" class="fk-gen-field" type="text" maxlength="40" placeholder="misal: anak muda, ibu rumah tangga&hellip;">
+              </div>
+            </div>
+            <div>
+              <span class="fk-gen-label">Vibe</span>
+              <div class="fk-gen-vibes" role="radiogroup" aria-label="Pilih vibe brand">
+                <label class="fk-gen-vibe"><input type="radio" name="fk-gen-vibe" value="playful" checked><span>Playful</span></label>
+                <label class="fk-gen-vibe"><input type="radio" name="fk-gen-vibe" value="professional"><span>Professional</span></label>
+                <label class="fk-gen-vibe"><input type="radio" name="fk-gen-vibe" value="bold"><span>Bold</span></label>
+                <label class="fk-gen-vibe"><input type="radio" name="fk-gen-vibe" value="minimalis"><span>Minimalis</span></label>
+              </div>
+            </div>
+            <button type="submit" class="fk-gen-btn fk-magnetic" style="background:linear-gradient(180deg, #2b2a4a, #1C1B33); color:#FBF6EE; padding:16px 30px; border-radius:999px; font-weight:700; font-size:16px; box-shadow:0 12px 32px -6px #1C1B3355; position:relative; overflow:hidden; align-self:flex-start; transition:transform .4s cubic-bezier(.34,1.56,.64,1);">
+              <span class="fk-spot" style="position:absolute; inset:0; border-radius:inherit; background:radial-gradient(140px circle at var(--mx,50%) var(--my,50%), #FFFFFF4D, transparent 60%); opacity:0; transition:opacity .3s ease; pointer-events:none;"></span>
+              <span style="position:relative; z-index:1;">Generate ✨</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div id="fk-gen-results" class="fk-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; max-width:1000px; margin:0 auto;" aria-live="polite"></div>
+      <p id="fk-gen-hint" style="display:none; text-align:center; font-size:14px; color:#1C1B3380; margin:28px 0 0;">Belum sreg? Klik generate lagi &mdash; hasilnya beda terus. Atau langsung aja ngobrol bareng kita.</p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var BANK = {
+      edukasi:   { prefix: ['Edu','Skola','Pinter','Belajar','Kelas','Cerdas','Ajar','Bisa'], suffix: ['kelas','pintar','ilmu','belajar','kul','ajar','paham','cerdas'], noun: 'ilmu', verbs: ['Belajar','Ngulik','Nyerap'] },
+      kesehatan: { prefix: ['Sehat','Vita','Bugar','Sigap','Prima','Rawat','Pulih','Segar'], suffix: ['sehat','bugar','medis','klinik','jaga','fit','rawat','prima'], noun: 'kesehatan', verbs: ['Jaga','Rawat','Pulihin'] },
+      fnb:       { prefix: ['Rasa','Nikmat','Kunyah','Santap','Selera','Dapur','Lahap','Gurih'], suffix: ['rasa','makan','kuliner','saji','kunyah','lezat','santap','lapar'], noun: 'kuliner', verbs: ['Santap','Rasain','Nikmatin'] },
+      teknologi: { prefix: ['Data','Sistem','Otomatis','Cepat','Pintar','Konek','Logika','Kilat'], suffix: ['sys','flow','stack','hub','base','labs','ku','tech'], noun: 'teknologi', verbs: ['Kelola','Otomatisin','Bangun'] },
+      kreatif:   { prefix: ['Karya','Rupa','Warna','Bentuk','Ide','Kanvas','Cipta','Goresan'], suffix: ['karya','studio','rupa','kreasi','visual','cipta','lab','warna'], noun: 'karya', verbs: ['Bikin','Rancang','Wujudkan'] },
+      fashion:   { prefix: ['Gaya','Kilau','Padu','Rancang','Anggun','Jelita','Tampil','Serasi'], suffix: ['gaya','padu','style','kilau','wear','pesona','look','rupa'], noun: 'gaya', verbs: ['Padu','Tampil','Rancang'] },
+      sosial:    { prefix: ['Peduli','Sama','Gerak','Bangun','Ruang','Suara','Rangkul','Ulur'], suffix: ['peduli','bersama','gerak','untuk','bakti','asa','tangan','kita'], noun: 'gerakan', verbs: ['Gerak','Rangkul','Bangun'] },
+      finansial: { prefix: ['Untung','Hemat','Modal','Aman','Tumbuh','Cuan','Rencana','Saldo'], suffix: ['untung','modal','tumbuh','aman','dana','hemat','cuan','plan'], noun: 'keuangan', verbs: ['Kelola','Tumbuhin','Atur'] }
+    };
+    var VIBE = {
+      playful:      { adj: ['ceria','seru','asik','ringan','hangat','gampang','gembira','nagih'], colors: [['Kuning cerah','#FFC93C'],['Biru langit','#5FB8E8'],['Putih krem','#FFF8ED']] },
+      professional: { adj: ['prima','solid','presisi','terpercaya','matang','tegas','rapi','andal'], colors: [['Navy','#1C2B4A'],['Abu kalem','#A8ADB4'],['Putih','#FFFFFF']] },
+      bold:         { adj: ['berani','tajam','beda','kencang','nekat','gebrak','lantang','total'], colors: [['Merah gelap','#C0392B'],['Hitam','#1A1A1A'],['Kuning aksen','#F2A623']] },
+      minimalis:    { adj: ['bersih','simpel','jernih','tenang','ringkas','murni','lega','pas'], colors: [['Krem','#F5F1E8'],['Abu muda','#D9D6CE'],['Hitam lembut','#2B2B2B']] }
+    };
+    var TEMPLATES = [
+      function (d) { return d.verb + ' ' + d.noun + ', jadi ' + d.adj + '.'; },
+      function (d) { return 'Bukan ' + d.noun + ' biasa. Ini yang ' + d.adj + '.'; },
+      function (d) { return cap(d.noun) + ' yang ' + d.adj + ', buat ' + d.target + '.'; },
+      function (d) { return 'Satu langkah kecil, ' + d.noun + ' yang ' + d.adj + ' nunggu.'; },
+      function (d) { return cap(d.target) + ' deserve ' + d.noun + ' yang ' + d.adj + '.'; },
+      function (d) { return 'Akhirnya, ' + d.noun + ' yang beneran ' + d.adj + '.'; }
+    ];
+    var WA_NUMBER = '6285710477257';
+    var INDUSTRIES = Object.keys(BANK);
+    var usedNames = [];
+
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function makeName(industry) {
+      for (var attempt = 0; attempt < 30; attempt++) {
+        var prefix = pick(BANK[industry].prefix);
+        // 30% chance ambil suffix dari industri lain biar variatif
+        var suffixPool = Math.random() < 0.3 ? BANK[pick(INDUSTRIES)].suffix : BANK[industry].suffix;
+        var suffix = pick(suffixPool).toLowerCase();
+        var p = prefix.toLowerCase();
+        if (p === suffix) continue;                       // "Rasarasa" dsb.
+        if (p.slice(-1) === suffix.charAt(0)) suffix = suffix.slice(1); // hindari huruf dobel di sambungan
+        var name = cap(p + suffix);
+        if (name.length < 5 || name.length > 14) continue;
+        if (usedNames.indexOf(name) !== -1) continue;     // anti keulang antar-klik
+        return name;
+      }
+      return null;
+    }
+
+    function makeTagline(industry, vibe, target) {
+      var d = {
+        noun: BANK[industry].noun,
+        verb: pick(BANK[industry].verbs),
+        adj: pick(VIBE[vibe].adj),
+        target: target || 'kamu'
+      };
+      return pick(TEMPLATES)(d);
+    }
+
+    function generate() {
+      var industry = document.getElementById('fk-gen-industri').value;
+      var target = document.getElementById('fk-gen-target').value.trim();
+      var vibe = document.querySelector('input[name="fk-gen-vibe"]:checked').value;
+      var colors = VIBE[vibe].colors;
+
+      if (usedNames.length > 60) usedNames = []; // reset biar bank gak habis
+      var count = 3, cards = [], taglines = [];
+
+      for (var i = 0; i < count; i++) {
+        var name = makeName(industry);
+        if (!name) { usedNames = []; name = makeName(industry) || cap(pick(BANK[industry].prefix)) + 'ku'; }
+        usedNames.push(name);
+
+        var tagline;
+        for (var t = 0; t < 10; t++) {
+          tagline = makeTagline(industry, vibe, target);
+          if (taglines.indexOf(tagline) === -1) break;    // anti duplikat di render yang sama
+        }
+        taglines.push(tagline);
+
+        var waText = encodeURIComponent('Halo Founderku, aku barusan generate nama brand "' + name + '" di situs kamu. Suka nih, bisa dibantu lanjutin gak?');
+        var swatches = colors.map(function (c) {
+          return '<div style="display:flex; flex-direction:column; align-items:center; gap:6px;">' +
+                   '<span class="fk-gen-swatch" style="background:' + c[1] + ';" title="' + c[0] + ' ' + c[1] + '"></span>' +
+                   '<span style="font-size:11px; font-weight:600; color:#1C1B3380;">' + c[1] + '</span>' +
+                 '</div>';
+        }).join('');
+
+        var tilt = (i % 2 === 0 ? -1.2 : 1.2) + 'deg';
+        cards.push(
+          '<div class="fk-gen-result" style="--tilt:' + tilt + '; animation-delay:' + (i * 0.12) + 's;">' +
+            '<div style="font-size:12px; font-weight:700; color:#F2A623; text-transform:uppercase; letter-spacing:0.08em;">Opsi ' + (i + 1) + '</div>' +
+            '<div style="font-family:\'Fraunces\',serif; font-weight:700; font-size:27px; letter-spacing:-0.01em; color:#1C1B33; line-height:1.15;">' + esc(name) + '</div>' +
+            '<p style="margin:0; font-size:15px; line-height:1.6; color:#1C1B3399; flex-grow:1;">&ldquo;' + esc(tagline) + '&rdquo;</p>' +
+            '<div style="display:flex; gap:14px;">' + swatches + '</div>' +
+            '<a class="fk-gen-cta" href="https://wa.me/' + WA_NUMBER + '?text=' + waText + '" target="_blank" rel="noopener">Suka ini? Chat kita <span aria-hidden="true">&rarr;</span></a>' +
+          '</div>'
+        );
+      }
+
+      document.getElementById('fk-gen-results').innerHTML = cards.join('');
+      document.getElementById('fk-gen-hint').style.display = 'block';
+    }
+
+    document.getElementById('fk-gen-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      generate();
+    });
+  })();
+  </script>
+
 
   <!-- CTA -->
   <div id="cta" class="fk-reveal" style="position:relative; overflow:hidden; background:linear-gradient(160deg, #E8B368, #B5721F);">
