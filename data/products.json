@@ -27,32 +27,6 @@
       "createdAt": "2026-07-08"
     },
     {
-      "id": "starter-coffee-shop",
-      "slug": "starter-coffee-shop",
-      "name": "Efeksains",
-      "category": "company-profile",
-      "categoryLabel": "company profile",
-      "price": 150000,
-      "priceLabel": "Rp 150.000",
-      "priceNote": "mulai dari",
-      "featured": false,
-      "shortDescription": "satu halaman buat validasi ide, ganti logo warna teks, langsung tampil profesional.",
-      "fullDescription": "ini website",
-      "featureTags": [
-        "1 halaman",
-        "responsive",
-        "animasi",
-        "bagus"
-      ],
-      "thumbnail": "images/products/placeholder.png",
-      "gallery": [
-        "images/products/placeholder.png"
-      ],
-      "liveUrl": "",
-      "whatsappMessage": "Halo, saya mau pesan Starter Coffee Shop",
-      "createdAt": "2026-07-08"
-    },
-    {
       "id": "company-profile-basic",
       "slug": "company-profile-basic",
       "name": "Company Profile: Basic",
