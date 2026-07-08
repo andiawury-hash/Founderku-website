@@ -25,28 +25,6 @@
       "liveUrl": "https://tukarskill.com",
       "whatsappMessage": "Halo, saya mau pesan TukarSkill",
       "createdAt": "2026-07-08"
-    },
-    {
-      "id": "company-profile-basic",
-      "slug": "company-profile-basic",
-      "name": "Company Profile: Basic",
-      "category": "company-profile",
-      "categoryLabel": "company profile",
-      "price": 3500000,
-      "priceLabel": "Rp 3.500.000",
-      "priceNote": "mulai dari",
-      "featured": false,
-      "shortDescription": "3-5 halaman, animasi ringan, cocok buat usaha yang sudah jalan dan butuh kredibilitas.",
-      "fullDescription": "",
-      "featureTags": [
-        "3-5 halaman",
-        "animasi"
-      ],
-      "thumbnail": "images/products/placeholder.png",
-      "gallery": [],
-      "liveUrl": "",
-      "whatsappMessage": "Halo, saya mau pesan Company Profile Basic",
-      "createdAt": "2026-07-08"
     }
   ],
   "categories": [
