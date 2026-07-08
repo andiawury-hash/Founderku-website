@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>admin · founderku</title>
+<link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAKAAoAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/fyiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --krem: #FBF6EE;
+    --krem-2: #F2ECDD;
+    --indigo: #7A78C4;
+    --indigo-deep: #1C1B33;
+    --amber: #F2A623;
+    --coral: #E15C3E;
+    --ink: #1C1B33;
+    --ink-soft: #1C1B3399;
+    --line: rgba(44,42,99,0.12);
+    --dot: rgba(44,42,99,0.16);
+    --danger: #C0392B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Manrope', sans-serif;
+    background: radial-gradient(var(--dot) 1.4px, transparent 1.4px);
+    background-size: 22px 22px;
+    background-color: var(--krem);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    min-height:100vh;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ text-decoration:none; color:inherit; }
+  .lowercase{ text-transform:lowercase; }
+
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 20px 40px;
+    background: rgba(247,242,231,0.9);
+    backdrop-filter: blur(8px);
+    position: sticky; top:0; z-index:50;
+    border-bottom: 1px solid var(--line);
+  }
+  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:20px; color:var(--indigo-deep); }
+  .logo span{ color:var(--coral); }
+  .nav-tag{ font-size:11px; font-weight:700; color:var(--coral); background:rgba(227,92,62,0.1); padding:4px 10px; border-radius:12px; margin-left:10px; }
+  .logout-btn{ font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer; }
+  .logout-btn:hover{ color:var(--danger); }
+
+  .wrap{ max-width: 980px; margin:0 auto; padding: 40px 24px 100px; }
+
+  /* SETUP SCREEN */
+  .setup-card{
+    max-width: 460px; margin: 90px auto; background:var(--krem); border:1px solid var(--line);
+    border-radius:18px; padding:36px;
+  }
+  .setup-card h2{ font-size:24px; color:var(--indigo-deep); margin-bottom:8px; }
+  .setup-card p{ font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin-bottom:22px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12.5px; font-weight:700; color:var(--ink-soft); margin-bottom:6px; }
+  .field input, .field select, .field textarea{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:10px;
+    font-family:'Manrope'; font-size:14px; background:#fff; color:var(--ink);
+  }
+  .field textarea{ resize:vertical; min-height:70px; }
+  .field small{ display:block; margin-top:5px; font-size:11.5px; color:var(--ink-soft); }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    padding: 12px 22px; border-radius:12px; font-weight:700; font-size:14px; cursor:pointer; border:none;
+  }
+  .btn-primary{ background:var(--amber); color:var(--indigo-deep); width:100%; }
+  .btn-primary:hover{ filter:brightness(0.96); }
+  .btn-ghost{ border:1.5px solid var(--indigo-deep); color:var(--indigo-deep); background:transparent; }
+  .btn-danger{ background:var(--danger); color:#fff; }
+  .btn-sm{ padding:8px 14px; font-size:12.5px; border-radius:10px; }
+  .status-msg{ font-size:13px; margin-top:14px; padding:10px 14px; border-radius:10px; display:none; }
+  .status-msg.error{ background:rgba(192,57,43,0.1); color:var(--danger); display:block; }
+  .status-msg.success{ background:rgba(46,140,90,0.1); color:#2E8C5A; display:block; }
+  .status-msg.info{ background:rgba(122,120,196,0.12); color:var(--indigo); display:block; }
+
+  /* DASHBOARD */
+  .dash-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+  .dash-header h1{ font-size:28px; color:var(--indigo-deep); }
+
+  .product-row{
+    display:flex; align-items:center; gap:16px; background:var(--krem); border:1px solid var(--line);
+    border-radius:14px; padding:14px 16px; margin-bottom:12px;
+  }
+  .product-row img, .product-row .no-img{
+    width:64px; height:48px; border-radius:8px; object-fit:cover; background:var(--krem-2); flex-shrink:0;
+  }
+  .product-row .no-img{ display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--ink-soft); text-align:center; }
+  .product-row .info{ flex:1; min-width:0; }
+  .product-row .info .name{ font-weight:700; font-size:15px; color:var(--indigo-deep); }
+  .product-row .info .meta{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+  .product-row .actions{ display:flex; gap:8px; flex-shrink:0; }
+  .featured-badge{ font-size:10px; font-weight:700; color:var(--coral); background:rgba(227,92,62,0.1); padding:3px 8px; border-radius:8px; margin-left:8px; }
+
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:14px; }
+
+  /* FORM MODAL */
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(28,27,51,0.55); z-index:100;
+    align-items:flex-start; justify-content:center; padding:40px 20px; overflow-y:auto;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal{
+    background:var(--krem); border-radius:18px; max-width:600px; width:100%; padding:32px;
+    max-height:none;
+  }
+  .modal h2{ font-size:22px; color:var(--indigo-deep); margin-bottom:20px; }
+  .modal-close{ float:right; font-size:20px; cursor:pointer; color:var(--ink-soft); }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .checkbox-row{ display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+  .checkbox-row input{ width:auto; }
+  .checkbox-row label{ font-size:13px; font-weight:600; color:var(--ink); }
+  .thumb-preview{
+    width:100%; height:140px; border-radius:12px; background:var(--krem-2); border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:10px; color:var(--ink-soft); font-size:12.5px;
+  }
+  .thumb-preview img{ width:100%; height:100%; object-fit:cover; }
+  .modal-actions{ display:flex; gap:10px; margin-top:22px; }
+  .modal-actions .btn{ flex:1; }
+
+  .spinner{
+    display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.4);
+    border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- SETUP / LOGIN SCREEN -->
+<div id="setupScreen" class="wrap">
+  <div class="setup-card">
+    <h2 class="lowercase">masuk admin</h2>
+    <p class="lowercase">buat nyambungin ke GitHub, isi token akses pribadi (personal access token) yang punya izin baca-tulis ke repo founderku. token ini cuma kesimpen di browser kamu sendiri, ga dikirim ke mana-mana selain GitHub.</p>
+
+    <div class="field">
+      <label class="lowercase">github personal access token</label>
+      <input type="password" id="inputToken" placeholder="ghp_xxxxxxxxxxxx">
+      <small class="lowercase">buat token baru di github.com → settings → developer settings → personal access tokens. kasih izin "repo" (contents read & write).</small>
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label class="lowercase">github username</label>
+        <input type="text" id="inputOwner" value="andiawury-hash">
+      </div>
+      <div class="field">
+        <label class="lowercase">nama repo</label>
+        <input type="text" id="inputRepo" value="Founderku-website">
+      </div>
+    </div>
+    <div class="field">
+      <label class="lowercase">branch</label>
+      <input type="text" id="inputBranch" value="main">
+    </div>
+    <button class="btn btn-primary lowercase" onclick="doLogin()">masuk</button>
+    <div id="loginStatus" class="status-msg"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashScreen" style="display:none;">
+  <nav>
+    <div><span class="logo">founder<span>ku</span></span><span class="nav-tag lowercase">admin</span></div>
+    <span class="logout-btn lowercase" onclick="doLogout()">keluar</span>
+  </nav>
+  <div class="wrap">
+    <div class="dash-header">
+      <h1 class="lowercase">produk store</h1>
+      <button class="btn btn-primary lowercase" onclick="openForm()">+ tambah produk</button>
+    </div>
+    <div id="statusBanner" class="status-msg"></div>
+    <div id="productList"></div>
+  </div>
+</div>
+
+<!-- FORM MODAL -->
+<div class="modal-overlay" id="formModal">
+  <div class="modal">
+    <span class="modal-close" onclick="closeForm()">&times;</span>
+    <h2 class="lowercase" id="formTitle">tambah produk</h2>
+
+    <div class="thumb-preview" id="thumbPreview">belum ada gambar</div>
+    <div class="field">
+      <label class="lowercase">gambar produk (thumbnail utama)</label>
+      <input type="file" id="fImage" accept="image/*" onchange="onImageChange(event)">
+      <small class="lowercase">gambar otomatis dikompres sebelum diupload.</small>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label class="lowercase">nama produk</label>
+        <input type="text" id="fName" oninput="autoSlug()">
+      </div>
+      <div class="field">
+        <label class="lowercase">slug (url)</label>
+        <input type="text" id="fSlug">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label class="lowercase">kategori</label>
+        <select id="fCategory">
+          <option value="landing-page">landing page</option>
+          <option value="company-profile">company profile</option>
+          <option value="portfolio">portfolio</option>
+          <option value="platform-marketplace">platform &amp; marketplace</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="lowercase">harga (rp)</label>
+        <input type="number" id="fPrice" placeholder="1800000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lowercase">deskripsi singkat (buat card)</label>
+      <textarea id="fShortDesc"></textarea>
+    </div>
+    <div class="field">
+      <label class="lowercase">deskripsi lengkap (buat halaman detail)</label>
+      <textarea id="fFullDesc"></textarea>
+    </div>
+    <div class="field">
+      <label class="lowercase">fitur (pisahin pakai koma)</label>
+      <input type="text" id="fFeatures" placeholder="ai matching, gamifikasi, forum">
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label class="lowercase">link live demo (opsional)</label>
+        <input type="text" id="fLiveUrl" placeholder="https://tukarskill.com">
+      </div>
+      <div class="field">
+        <label class="lowercase">pesan whatsapp</label>
+        <input type="text" id="fWaMsg">
+      </div>
+    </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="fFeatured">
+      <label for="fFeatured" class="lowercase">tandai sebagai produk unggulan</label>
+    </div>
+
+    <div id="formStatus" class="status-msg"></div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost lowercase" onclick="closeForm()">batal</button>
+      <button class="btn btn-primary lowercase" id="saveBtn" onclick="saveProduct()">simpan produk</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const LS_KEY = 'fk_admin_config';
+let config = null;
+let productsData = { products: [], categories: [] };
+let productsSha = null;
+let editingId = null;
+let pendingImageBase64 = null;
+let pendingImageExt = null;
+
+function loadConfig(){
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) config = JSON.parse(raw);
+  } catch(e){}
+}
+function saveConfig(){
+  localStorage.setItem(LS_KEY, JSON.stringify(config));
+}
+
+function apiHeaders(){
+  return {
+    'Authorization': 'token ' + config.token,
+    'Accept': 'application/vnd.github+json'
+  };
+}
+function apiBase(){
+  return `https://api.github.com/repos/${config.owner}/${config.repo}/contents/`;
+}
+
+async function doLogin(){
+  const token = document.getElementById('inputToken').value.trim();
+  const owner = document.getElementById('inputOwner').value.trim();
+  const repo = document.getElementById('inputRepo').value.trim();
+  const branch = document.getElementById('inputBranch').value.trim() || 'main';
+  const statusEl = document.getElementById('loginStatus');
+
+  if (!token || !owner || !repo){
+    statusEl.className = 'status-msg error';
+    statusEl.textContent = 'isi semua kolom dulu ya.';
+    return;
+  }
+  config = { token, owner, repo, branch };
+  statusEl.className = 'status-msg info';
+  statusEl.textContent = 'menghubungkan ke github...';
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers: apiHeaders() });
+    if (!res.ok) throw new Error('repo tidak ditemukan atau token salah (status ' + res.status + ')');
+    saveConfig();
+    statusEl.className = 'status-msg success';
+    statusEl.textContent = 'berhasil terhubung.';
+    setTimeout(() => { showDashboard(); }, 400);
+  } catch(err){
+    statusEl.className = 'status-msg error';
+    statusEl.textContent = 'gagal konek: ' + err.message;
+  }
+}
+
+function doLogout(){
+  localStorage.removeItem(LS_KEY);
+  config = null;
+  document.getElementById('dashScreen').style.display = 'none';
+  document.getElementById('setupScreen').style.display = 'block';
+}
+
+async function showDashboard(){
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('dashScreen').style.display = 'block';
+  await loadProducts();
+}
+
+async function loadProducts(){
+  const banner = document.getElementById('statusBanner');
+  banner.className = 'status-msg info';
+  banner.textContent = 'memuat produk...';
+  try {
+    const res = await fetch(apiBase() + 'data/products.json?ref=' + config.branch, { headers: apiHeaders() });
+    if (!res.ok) throw new Error('gagal ambil data/products.json (status ' + res.status + ')');
+    const json = await res.json();
+    productsSha = json.sha;
+    const decoded = decodeURIComponent(escape(atob(json.content.replace(/\n/g, ''))));
+    productsData = JSON.parse(decoded);
+    if (!productsData.categories) productsData.categories = [];
+    banner.style.display = 'none';
+    renderProductList();
+  } catch(err){
+    banner.className = 'status-msg error';
+    banner.textContent = 'error: ' + err.message;
+  }
+}
+
+function renderProductList(){
+  const list = document.getElementById('productList');
+  const items = productsData.products || [];
+  if (!items.length){
+    list.innerHTML = `<div class="empty-state lowercase">belum ada produk. klik "tambah produk" buat mulai.</div>`;
+    return;
+  }
+  list.innerHTML = items.map(p => `
+    <div class="product-row">
+      ${p.thumbnail && !p.thumbnail.includes('placeholder') ? `<img src="${p.thumbnail}?t=${Date.now()}">` : `<div class="no-img lowercase">no image</div>`}
+      <div class="info">
+        <div class="name">${p.name}${p.featured ? '<span class="featured-badge lowercase">unggulan</span>' : ''}</div>
+        <div class="meta lowercase">${p.categoryLabel || p.category} &middot; ${p.priceLabel || p.price}</div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost btn-sm lowercase" onclick="editProduct('${p.id}')">edit</button>
+        <button class="btn btn-danger btn-sm lowercase" onclick="deleteProduct('${p.id}')">hapus</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function autoSlug(){
+  if (editingId) return; // don't auto-change slug when editing
+  const name = document.getElementById('fName').value;
+  const slug = name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  document.getElementById('fSlug').value = slug;
+  const waField = document.getElementById('fWaMsg');
+  if (!waField.dataset.touched) waField.value = 'Halo, saya mau pesan ' + name;
+}
+
+function openForm(product){
+  editingId = product ? product.id : null;
+  pendingImageBase64 = null;
+  pendingImageExt = null;
+  document.getElementById('formTitle').textContent = product ? 'edit produk' : 'tambah produk';
+  document.getElementById('fName').value = product ? product.name : '';
+  document.getElementById('fSlug').value = product ? product.slug : '';
+  document.getElementById('fCategory').value = product ? product.category : 'landing-page';
+  document.getElementById('fPrice').value = product ? product.price : '';
+  document.getElementById('fShortDesc').value = product ? (product.shortDescription || '') : '';
+  document.getElementById('fFullDesc').value = product ? (product.fullDescription || '') : '';
+  document.getElementById('fFeatures').value = product && product.featureTags ? product.featureTags.join(', ') : '';
+  document.getElementById('fLiveUrl').value = product ? (product.liveUrl || '') : '';
+  document.getElementById('fWaMsg').value = product ? (product.whatsappMessage || '') : '';
+  document.getElementById('fWaMsg').dataset.touched = product ? '1' : '';
+  document.getElementById('fFeatured').checked = product ? !!product.featured : false;
+  document.getElementById('formStatus').style.display = 'none';
+
+  const preview = document.getElementById('thumbPreview');
+  if (product && product.thumbnail && !product.thumbnail.includes('placeholder')){
+    preview.innerHTML = `<img src="${product.thumbnail}?t=${Date.now()}">`;
+  } else {
+    preview.innerHTML = 'belum ada gambar';
+  }
+
+  document.getElementById('formModal').classList.add('open');
+}
+function closeForm(){
+  document.getElementById('formModal').classList.remove('open');
+}
+function editProduct(id){
+  const p = productsData.products.find(x => x.id === id);
+  if (p) openForm(p);
+}
+
+function onImageChange(e){
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const img = new Image();
+    img.onload = function(){
+      const maxW = 1000;
+      const scale = Math.min(1, maxW / img.width);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+      pendingImageBase64 = dataUrl.split(',')[1];
+      pendingImageExt = 'jpg';
+      document.getElementById('thumbPreview').innerHTML = `<img src="${dataUrl}">`;
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function ghGetFile(path){
+  const res = await fetch(apiBase() + path + '?ref=' + config.branch, { headers: apiHeaders() });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error('gagal ambil ' + path);
+  return res.json();
+}
+
+async function ghPutFile(path, contentBase64, message, sha){
+  const body = { message, content: contentBase64, branch: config.branch };
+  if (sha) body.sha = sha;
+  const res = await fetch(apiBase() + path, {
+    method: 'PUT',
+    headers: { ...apiHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok){
+    const errJson = await res.json().catch(() => ({}));
+    throw new Error(errJson.message || ('gagal simpan ' + path));
+  }
+  return res.json();
+}
+
+async function ghDeleteFile(path, message, sha){
+  const res = await fetch(apiBase() + path, {
+    method: 'DELETE',
+    headers: { ...apiHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, sha, branch: config.branch })
+  });
+  return res.ok;
+}
+
+function setFormStatus(type, msg){
+  const el = document.getElementById('formStatus');
+  el.className = 'status-msg ' + type;
+  el.textContent = msg;
+}
+
+async function saveProduct(){
+  const name = document.getElementById('fName').value.trim();
+  const slug = document.getElementById('fSlug').value.trim();
+  const category = document.getElementById('fCategory').value;
+  const categoryLabel = document.getElementById('fCategory').selectedOptions[0].textContent;
+  const price = parseInt(document.getElementById('fPrice').value || '0', 10);
+  const shortDescription = document.getElementById('fShortDesc').value.trim();
+  const fullDescription = document.getElementById('fFullDesc').value.trim();
+  const featureTags = document.getElementById('fFeatures').value.split(',').map(s => s.trim()).filter(Boolean);
+  const liveUrl = document.getElementById('fLiveUrl').value.trim();
+  const whatsappMessage = document.getElementById('fWaMsg').value.trim() || ('Halo, saya mau pesan ' + name);
+  const featured = document.getElementById('fFeatured').checked;
+
+  if (!name || !slug){
+    setFormStatus('error', 'nama dan slug wajib diisi.');
+    return;
+  }
+
+  const saveBtn = document.getElementById('saveBtn');
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<span class="spinner"></span> menyimpan...';
+  setFormStatus('info', 'menyimpan produk...');
+
+  try {
+    let thumbnailPath = null;
+    if (editingId){
+      const existing = productsData.products.find(x => x.id === editingId);
+      thumbnailPath = existing ? existing.thumbnail : null;
+    }
+
+    // upload image if a new one was selected
+    if (pendingImageBase64){
+      setFormStatus('info', 'mengupload gambar...');
+      const imgPath = `images/products/${slug}.${pendingImageExt}`;
+      const existingImg = await ghGetFile(imgPath);
+      await ghPutFile(imgPath, pendingImageBase64, `Update image for ${name}`, existingImg ? existingImg.sha : null);
+      thumbnailPath = imgPath;
+    }
+
+    const productObj = {
+      id: editingId || slug,
+      slug,
+      name,
+      category,
+      categoryLabel,
+      price,
+      priceLabel: 'Rp ' + price.toLocaleString('id-ID'),
+      priceNote: 'mulai dari',
+      featured,
+      shortDescription,
+      fullDescription,
+      featureTags,
+      thumbnail: thumbnailPath || 'images/products/placeholder.png',
+      gallery: thumbnailPath ? [thumbnailPath] : [],
+      liveUrl,
+      whatsappMessage,
+      createdAt: editingId ? (productsData.products.find(x => x.id === editingId).createdAt || new Date().toISOString().slice(0,10)) : new Date().toISOString().slice(0,10)
+    };
+
+    if (editingId){
+      const idx = productsData.products.findIndex(x => x.id === editingId);
+      productsData.products[idx] = productObj;
+    } else {
+      productsData.products.push(productObj);
+    }
+
+    setFormStatus('info', 'menyimpan data produk...');
+    const jsonStr = JSON.stringify(productsData, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
+    const result = await ghPutFile('data/products.json', base64Content, `${editingId ? 'Update' : 'Add'} product: ${name}`, productsSha);
+    productsSha = result.content.sha;
+
+    setFormStatus('success', 'produk berhasil disimpan.');
+    renderProductList();
+    setTimeout(() => { closeForm(); }, 700);
+  } catch(err){
+    setFormStatus('error', 'gagal: ' + err.message);
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.innerHTML = 'simpan produk';
+  }
+}
+
+async function deleteProduct(id){
+  const p = productsData.products.find(x => x.id === id);
+  if (!p) return;
+  if (!confirm(`Yakin mau hapus "${p.name}"? Tindakan ini tidak bisa dibatalkan.`)) return;
+
+  const banner = document.getElementById('statusBanner');
+  banner.className = 'status-msg info';
+  banner.textContent = 'menghapus produk...';
+
+  try {
+    productsData.products = productsData.products.filter(x => x.id !== id);
+    const jsonStr = JSON.stringify(productsData, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
+    const result = await ghPutFile('data/products.json', base64Content, `Delete product: ${p.name}`, productsSha);
+    productsSha = result.content.sha;
+    banner.className = 'status-msg success';
+    banner.textContent = 'produk dihapus.';
+    renderProductList();
+    setTimeout(() => { banner.style.display = 'none'; }, 2000);
+  } catch(err){
+    banner.className = 'status-msg error';
+    banner.textContent = 'gagal hapus: ' + err.message;
+  }
+}
+
+// init
+loadConfig();
+if (config && config.token){
+  document.getElementById('inputToken').value = config.token;
+  document.getElementById('inputOwner').value = config.owner;
+  document.getElementById('inputRepo').value = config.repo;
+  document.getElementById('inputBranch').value = config.branch;
+  showDashboard();
+}
+</script>
+
+</body>
+</html>
