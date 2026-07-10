@@ -56,6 +56,32 @@
       "liveUrl": "https://founderku.github.io/Motifa/",
       "whatsappMessage": "Halo, saya tertarik dengan paket Motifa. Boleh cerita lebih lanjut soal cara kerja sistemnya?",
       "createdAt": "2026-07-09"
+    },
+    {
+      "id": "kelasin",
+      "slug": "kelasin",
+      "name": "Kelasin",
+      "category": "platform-marketplace",
+      "categoryLabel": "platform & marketplace",
+      "price": 1800000,
+      "priceLabel": "Rp 1.800.000",
+      "priceNote": "mulai dari",
+      "featured": false,
+      "shortDescription": "platform kelas mikro 15-30 menit buat skill harian, direkam pengajar biasa pake HP. desain sticky-note khas, katalog interaktif, alur pesan via whatsapp.",
+      "fullDescription": "Kelasin adalah paket starter platform belajar skill harian, dua sisi: pembelajar yang butuh solusi cepat (servis motor, jahit, masak, dll) dan pengajar orang biasa yang punya skill tapi belum punya cara monetisasi. Beda dari platform kursus formal, kelas di sini pendek (15-30 menit), murah (mulai Rp 5.000), dan direkam pengajar langsung pake HP.\n\nYang udah termasuk: dua halaman fungsional (landing page dan katalog lengkap), identitas visual sticky-note/corkboard yang khas, search dan filter kategori, modal detail tiap kelas lengkap dengan preview video contoh, serta alur pembelian dan pendaftaran pengajar yang langsung terhubung ke WhatsApp. Data kelas udah terstruktur rapi lewat JSON, siap dikembangin ke admin panel atau sistem pembayaran otomatis begitu ada traksi nyata. Cocok buat validasi ide dulu sebelum investasi ke sistem yang lebih kompleks.",
+      "featureTags": [
+        "katalog interaktif",
+        "search & filter kategori",
+        "preview video contoh",
+        "alur pesan via whatsapp"
+      ],
+      "thumbnail": "images/products/kelasin.jpg",
+      "gallery": [
+        "images/products/kelasin.jpg"
+      ],
+      "liveUrl": "https://founderku.github.io/Kelasin/index",
+      "whatsappMessage": "Halo, saya mau pesan Kelasin",
+      "createdAt": "2026-07-10"
     }
   ],
   "categories": [
