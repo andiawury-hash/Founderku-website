@@ -1,0 +1,28 @@
+{
+  "caseStudies": [
+    {
+      "id": "tukarskill",
+      "name": "TukarSkill",
+      "logo": "images/case-studies/tukarskill-logo.png",
+      "description": "TukarSkill adalah platform buat saling tukar skill antar sesama. Dari ide, kami bantu bangun identitas brand dan MVP yang siap dicoba user pertama.",
+      "tags": ["Branding", "MVP", "Landing Page"],
+      "note": "Dikerjakan lewat proses 4 langkah Founderku — dari ngobrol ide sampai produk jalan.",
+      "linkUrl": "product.html?slug=tukarskill",
+      "linkLabel": "Lihat produk jadi & detailnya",
+      "external": false,
+      "order": 1
+    },
+    {
+      "id": "say-cheese",
+      "name": "Say Cheese",
+      "logo": "images/case-studies/say-cheese-logo.png",
+      "description": "Say Cheese adalah brand handcrafted cheesecake & chiffon cake made-to-order di Şişli, Istanbul. Kami bangun ulang website-nya dari Wix jadi custom website lengkap dengan animasi interaktif dan domain sendiri.",
+      "tags": ["Custom Website", "Brand Identity", "Domain & Deployment"],
+      "note": "4 halaman custom, animasi interaktif, dan setup domain dari nol sampai online.",
+      "linkUrl": "https://saycheese.cfd",
+      "linkLabel": "Kunjungi website",
+      "external": true,
+      "order": 2
+    }
+  ]
+}
