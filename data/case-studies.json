@@ -68,6 +68,23 @@
       "linkLabel": "Kunjungi Motifa",
       "external": true,
       "order": 4
+    },
+    {
+      "id": "lahirku",
+      "name": "Lahirku",
+      "logo": "images/case-studies/lahirku-logo.png",
+      "roundLogo": true,
+      "description": "Generator kartu kelahiran bayi berbasis weton (tradisi Jawa). Orang tua tinggal isi nama dan tanggal lahir bayi, sistem otomatis hitung hari-pasaran, neptu, dan watak, lalu disusun jadi kartu kelahiran bergaya heirloom yang bisa dipajang atau dijadiin kado kelahiran. Bukan cuma kalkulator teks kayak situs weton lainnya.",
+      "tags": [
+        "Kalkulator Weton",
+        "Kado Kelahiran",
+        "Digital Product"
+      ],
+      "note": "Dikerjakan lewat proses 4 langkah Founderku — dari riset kompetitor sampai landing page + generator jadi.",
+      "linkUrl": "https://founderku.github.io/Lahirku/",
+      "linkLabel": "Lihat Lahirku disini",
+      "external": true,
+      "order": 5
     }
   ]
 }
