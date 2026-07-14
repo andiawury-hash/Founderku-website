@@ -140,6 +140,7 @@
     width:16px; height:16px; border-radius:50%; border:1.5px dashed var(--ink-soft);
     flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:9px; margin-top:2px;
   }
+  .fk-lang-btn.is-active{ background: var(--indigo-deep) !important; color: var(--krem) !important; }
 
   @media(max-width: 860px){
     .detail-wrap{ grid-template-columns: 1fr; padding:0 24px; }
@@ -154,11 +155,18 @@
 
 <nav>
   <a href="index.html" class="logo">founder<span>ku</span></a>
-  <a href="index.html#cta" class="nav-cta lowercase">mulai proyek</a>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <a href="index.html#cta" class="nav-cta lowercase" data-i18n="nav.mulaiProyek">mulai proyek</a>
+    <div id="fkLangSwitch" style="display:flex; align-items:center; gap:4px; flex:none; background:rgba(28,27,51,0.06); border-radius:999px; padding:4px;">
+      <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:var(--ink-soft); padding:6px 11px; border-radius:999px; transition:all .2s ease;">ID</button>
+      <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:var(--ink-soft); padding:6px 11px; border-radius:999px; transition:all .2s ease;">EN</button>
+      <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:var(--ink-soft); padding:6px 11px; border-radius:999px; transition:all .2s ease;">TR</button>
+    </div>
+  </div>
 </nav>
 
 <div class="breadcrumb lowercase" id="breadcrumb">
-  <a href="store.html">store</a><span class="sep">/</span><span class="current">memuat...</span>
+  <a href="store.html" data-i18n="breadcrumb.store">store</a><span class="sep">/</span><span class="current" data-i18n="breadcrumb.loading">memuat...</span>
 </div>
 
 <div class="detail-wrap" id="detailWrap" style="display:none;">
@@ -166,19 +174,19 @@
   <div class="detail-left">
     <div class="gallery-main">
       <div class="tag-punch lowercase" id="galCat">produk</div>
-      <div id="galMain" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--krem-2);color:var(--ink-soft);font-size:13px;font-weight:600;">
+      <div id="galMain" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--krem-2);color:var(--ink-soft);font-size:13px;font-weight:600;" data-i18n="gallery.loading">
         memuat gambar...
       </div>
     </div>
     <div class="thumb-row" id="thumbRow"></div>
 
     <div class="section-block">
-      <h3 class="lowercase">kenapa produk ini</h3>
+      <h3 class="lowercase" data-i18n="section.kenapa">kenapa produk ini</h3>
       <div id="fullDesc"></div>
     </div>
 
     <div class="section-block" id="featureBlock">
-      <h3 class="lowercase">apa aja yang kamu dapetin</h3>
+      <h3 class="lowercase" data-i18n="section.fitur">apa aja yang kamu dapetin</h3>
       <div class="feature-grid" id="featureGrid"></div>
     </div>
   </div>
@@ -189,39 +197,111 @@
     <div class="buy-desc" id="buyDesc"></div>
 
     <div class="buy-price-block">
-      <small class="lowercase" id="buyPriceNote">mulai dari</small>
+      <small class="lowercase" id="buyPriceNote" data-i18n="buy.priceNote">mulai dari</small>
       <div class="buy-price" id="buyPrice"></div>
     </div>
 
     <div class="buy-actions">
-      <a href="#" class="btn-order lowercase" id="btnOrder" target="_blank">pesan & mulai sekarang</a>
-      <a href="#" class="btn-visit lowercase" id="btnVisit" target="_blank" style="display:none;">visit website ↗</a>
+      <a href="#" class="btn-order lowercase" id="btnOrder" target="_blank" data-i18n="buy.order">pesan &amp; mulai sekarang</a>
+      <a href="#" class="btn-visit lowercase" id="btnVisit" target="_blank" style="display:none;" data-i18n="buy.visit">visit website ↗</a>
     </div>
 
     <div class="buy-note lowercase">
       <div class="dot-icon">i</div>
-      <div>klik pesan, kamu bakal diarahkan langsung ke whatsapp buat ngobrol soal rebranding dan setup, gratis konsultasinya.</div>
+      <div data-i18n="buy.note">klik pesan, kamu bakal diarahkan langsung ke whatsapp buat ngobrol soal rebranding dan setup, gratis konsultasinya.</div>
     </div>
   </div>
 
 </div>
 
 <div id="notFoundState" style="display:none; text-align:center; padding:100px 26px; color:var(--ink-soft);" class="lowercase">
-  produk ini kayaknya belum ada atau udah dipindah. tenang, masih banyak pilihan lain. <a href="store.html" style="color:var(--coral); font-weight:700;">balik ke store →</a>
+  <span data-i18n="notFound.text">produk ini kayaknya belum ada atau udah dipindah. tenang, masih banyak pilihan lain.</span> <a href="store.html" style="color:var(--coral); font-weight:700;" data-i18n="notFound.link">balik ke store →</a>
 </div>
 
 <script>
+var PRODUCT_I18N = {
+  id: {
+    "nav.mulaiProyek": "mulai proyek",
+    "breadcrumb.store": "store", "breadcrumb.loading": "memuat...", "breadcrumb.notFound": "produk tidak ditemukan",
+    "gallery.loading": "memuat gambar...", "gallery.noImage": "gambar belum tersedia",
+    "section.kenapa": "kenapa produk ini", "section.fitur": "apa aja yang kamu dapetin",
+    "buy.priceNote": "mulai dari", "buy.order": "pesan & mulai sekarang", "buy.visit": "visit website ↗",
+    "buy.note": "klik pesan, kamu bakal diarahkan langsung ke whatsapp buat ngobrol soal rebranding dan setup, gratis konsultasinya.",
+    "notFound.text": "produk ini kayaknya belum ada atau udah dipindah. tenang, masih banyak pilihan lain.",
+    "notFound.link": "balik ke store →"
+  },
+  en: {
+    "nav.mulaiProyek": "start a project",
+    "breadcrumb.store": "store", "breadcrumb.loading": "loading...", "breadcrumb.notFound": "product not found",
+    "gallery.loading": "loading image...", "gallery.noImage": "image not available yet",
+    "section.kenapa": "why this product", "section.fitur": "what you get",
+    "buy.priceNote": "starting from", "buy.order": "order & get started", "buy.visit": "visit website ↗",
+    "buy.note": "click order and you'll be taken straight to whatsapp to talk about rebranding and setup, the consultation is free.",
+    "notFound.text": "this product seems to be missing or has moved. don't worry, there are plenty of other options.",
+    "notFound.link": "back to store →"
+  },
+  tr: {
+    "nav.mulaiProyek": "projeye başla",
+    "breadcrumb.store": "mağaza", "breadcrumb.loading": "yükleniyor...", "breadcrumb.notFound": "ürün bulunamadı",
+    "gallery.loading": "görsel yükleniyor...", "gallery.noImage": "görsel henüz yok",
+    "section.kenapa": "bu ürün neden var", "section.fitur": "neler alıyorsun",
+    "buy.priceNote": "başlangıç fiyatı", "buy.order": "sipariş ver & hemen başla", "buy.visit": "web sitesini gör ↗",
+    "buy.note": "sipariş ver butonuna tıkladığında direkt whatsapp'a yönlendirilirsin, rebranding ve kurulum hakkında konuşuruz, danışmanlık ücretsiz.",
+    "notFound.text": "bu ürün eksik görünüyor ya da taşınmış olabilir. merak etme, başka birçok seçenek var.",
+    "notFound.link": "mağazaya dön →"
+  }
+};
+
+var fkCurrentLang = 'id';
+try { fkCurrentLang = localStorage.getItem('fk-lang') || 'id'; } catch (e) {}
+
+function fkProductDict() { return PRODUCT_I18N[fkCurrentLang] || PRODUCT_I18N.id; }
+
+function applyProductStaticI18n() {
+  var dict = fkProductDict();
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var key = el.getAttribute('data-i18n');
+    if (dict[key]) el.textContent = dict[key];
+  });
+  document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
+    btn.classList.toggle('is-active', btn.getAttribute('data-lang') === fkCurrentLang);
+  });
+  document.documentElement.setAttribute('lang', fkCurrentLang);
+}
+
 (async function(){
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
   const breadcrumb = document.getElementById('breadcrumb');
   const detailWrap = document.getElementById('detailWrap');
   const notFoundState = document.getElementById('notFoundState');
+  let currentProduct = null;
 
   function showNotFound(){
-    breadcrumb.innerHTML = `<a href="store.html">store</a><span class="sep">/</span><span class="current">produk tidak ditemukan</span>`;
+    var dict = fkProductDict();
+    breadcrumb.innerHTML = `<a href="store.html">${dict['breadcrumb.store']}</a><span class="sep">/</span><span class="current">${dict['breadcrumb.notFound']}</span>`;
     notFoundState.style.display = 'block';
   }
+
+  function renderProductText(){
+    if (!currentProduct) return;
+    var dict = fkProductDict();
+    var p = currentProduct;
+    const catLabel = p.categoryLabel || p.category;
+    breadcrumb.innerHTML = `<a href="store.html">${dict['breadcrumb.store']}</a><span class="sep">/</span><a href="store.html">${catLabel}</a><span class="sep">/</span><span class="current" style="text-transform:none;">${p.name}</span>`;
+    document.getElementById('buyPriceNote').textContent = p.priceNote || dict['buy.priceNote'];
+  }
+
+  document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      fkCurrentLang = btn.getAttribute('data-lang');
+      try { localStorage.setItem('fk-lang', fkCurrentLang); } catch (e) {}
+      applyProductStaticI18n();
+      if (currentProduct) { renderProductText(); } else if (notFoundState.style.display === 'block') { showNotFound(); }
+    });
+  });
+
+  applyProductStaticI18n();
 
   if (!slug) { showNotFound(); return; }
 
@@ -230,18 +310,19 @@
     const data = await res.json();
     const p = (data.products || []).find(x => x.slug === slug);
     if (!p) { showNotFound(); return; }
+    currentProduct = p;
 
     document.title = p.name + ' · founderku';
 
     const catLabel = p.categoryLabel || p.category;
-    breadcrumb.innerHTML = `<a href="store.html">store</a><span class="sep">/</span><a href="store.html">${catLabel}</a><span class="sep">/</span><span class="current" style="text-transform:none;">${p.name}</span>`;
+    renderProductText();
 
     document.getElementById('galCat').textContent = catLabel;
     const galMain = document.getElementById('galMain');
     if (p.gallery && p.gallery.length && !p.gallery[0].includes('placeholder')) {
       galMain.outerHTML = `<img id="galMain" src="${p.gallery[0]}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">`;
     } else {
-      galMain.textContent = 'gambar belum tersedia';
+      galMain.textContent = fkProductDict()['gallery.noImage'];
     }
 
     const thumbRow = document.getElementById('thumbRow');
@@ -282,7 +363,6 @@
     document.getElementById('buyCat').textContent = catLabel;
     document.getElementById('buyTitle').textContent = p.name;
     document.getElementById('buyDesc').textContent = p.shortDescription || '';
-    document.getElementById('buyPriceNote').textContent = p.priceNote || 'mulai dari';
     document.getElementById('buyPrice').textContent = p.priceLabel || ('Rp ' + Number(p.price).toLocaleString('id-ID'));
 
     const waMsg = p.whatsappMessage || ('Halo, saya mau pesan ' + p.name);

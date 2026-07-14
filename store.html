@@ -96,6 +96,7 @@
     border:1px solid var(--line); color:var(--ink-soft); background: var(--krem);
   }
   .chip.active{ background: var(--indigo-deep); color:var(--krem); border-color:var(--indigo-deep); }
+  .fk-lang-btn.is-active{ background: var(--indigo-deep) !important; color: var(--krem) !important; }
 
   /* GRID */
   .grid{
@@ -175,22 +176,29 @@
 
 <nav>
   <a href="index.html" class="logo">founder<span>ku</span></a>
-  <div class="nav-links">
-    <a href="index.html#layanan">layanan</a>
-    <a href="index.html#kenapa">tentang</a>
-    <a href="store.html" style="color:var(--coral)">instant founder</a>
-    <a href="index.html#cta">kontak</a>
+  <div style="display:flex; align-items:center; gap:20px;">
+    <div class="nav-links">
+      <a href="index.html#layanan" data-i18n="nav.layanan">layanan</a>
+      <a href="index.html#kenapa" data-i18n="nav.tentang">tentang</a>
+      <a href="store.html" style="color:var(--coral)" data-i18n="nav.instantFounder">instant founder</a>
+      <a href="index.html#cta" data-i18n="nav.kontak">kontak</a>
+    </div>
+    <a href="index.html#cta" class="nav-cta lowercase" data-i18n="nav.mulaiProyek">mulai proyek</a>
+    <div id="fkLangSwitch" style="display:flex; align-items:center; gap:4px; flex:none; background:rgba(28,27,51,0.06); border-radius:999px; padding:4px;">
+      <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:var(--ink-soft); padding:6px 11px; border-radius:999px; transition:all .2s ease;">ID</button>
+      <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:var(--ink-soft); padding:6px 11px; border-radius:999px; transition:all .2s ease;">EN</button>
+      <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:var(--ink-soft); padding:6px 11px; border-radius:999px; transition:all .2s ease;">TR</button>
+    </div>
   </div>
-  <a href="index.html#cta" class="nav-cta lowercase">mulai proyek</a>
 </nav>
 
 <section class="hero">
-  <div class="eyebrow lowercase">instant founder · paket lengkap, tinggal jalan</div>
-  <h1 class="lowercase">pilih website-nya, <em>kami bantu kamu</em> jadi founder.</h1>
-  <p class="lowercase">bukan template kosongan. tiap produk di sini sudah lengkap, brand, tone warna, sampai cerita produknya. kamu tinggal pilih yang paling nyambung, kami dampingi sampai bisnismu beneran online dan jalan.</p>
+  <div class="eyebrow lowercase" data-i18n="hero.eyebrow">instant founder · paket lengkap, tinggal jalan</div>
+  <h1 class="lowercase" id="fkStoreH1">pilih website-nya, <em>kami bantu kamu</em> jadi founder.</h1>
+  <p class="lowercase" data-i18n="hero.sub">bukan template kosongan. tiap produk di sini sudah lengkap, brand, tone warna, sampai cerita produknya. kamu tinggal pilih yang paling nyambung, kami dampingi sampai bisnismu beneran online dan jalan.</p>
   <div class="hero-actions">
-    <a href="#katalog" class="btn-primary lowercase">lihat katalog</a>
-    <a href="index.html#cta" class="btn-ghost lowercase">butuh custom? →</a>
+    <a href="#katalog" class="btn-primary lowercase" data-i18n="hero.ctaPrimary">lihat katalog</a>
+    <a href="index.html#cta" class="btn-ghost lowercase" data-i18n="hero.ctaGhost">butuh custom? →</a>
   </div>
 </section>
 
@@ -199,12 +207,87 @@
 </div>
 
 <div class="grid" id="katalog">
-  <div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-soft); font-size:14px;" id="loadingState" class="lowercase">memuat katalog...</div>
+  <div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-soft); font-size:14px;" id="loadingState" class="lowercase" data-i18n="loading">memuat katalog...</div>
 </div>
 
-<footer class="lowercase">founderku · semua bisa jadi founder, tinggal pilih jalannya</footer>
+<footer class="lowercase" data-i18n="footer">founderku · semua bisa jadi founder, tinggal pilih jalannya</footer>
 
 <script>
+var STORE_I18N = {
+  id: {
+    "nav.layanan": "layanan", "nav.tentang": "tentang", "nav.instantFounder": "instant founder", "nav.kontak": "kontak",
+    "nav.mulaiProyek": "mulai proyek",
+    "hero.eyebrow": "instant founder · paket lengkap, tinggal jalan",
+    "hero.h1": 'pilih website-nya, <em>kami bantu kamu</em> jadi founder.',
+    "hero.sub": "bukan template kosongan. tiap produk di sini sudah lengkap, brand, tone warna, sampai cerita produknya. kamu tinggal pilih yang paling nyambung, kami dampingi sampai bisnismu beneran online dan jalan.",
+    "hero.ctaPrimary": "lihat katalog", "hero.ctaGhost": "butuh custom? →",
+    "loading": "memuat katalog...",
+    "footer": "founderku · semua bisa jadi founder, tinggal pilih jalannya",
+    "chip.all": "semua",
+    "viewDetail": "lihat detail", "comingSoon": "coming soon", "priceNote": "mulai dari",
+    "emptyCategory": "belum ada produk di kategori ini.",
+    "errorLoad": "gagal memuat katalog. coba refresh halaman ini.",
+    "cat.landing-page": "landing page", "cat.company-profile": "company profile",
+    "cat.portfolio": "portfolio", "cat.platform-marketplace": "platform & marketplace"
+  },
+  en: {
+    "nav.layanan": "services", "nav.tentang": "about", "nav.instantFounder": "instant founder", "nav.kontak": "contact",
+    "nav.mulaiProyek": "start a project",
+    "hero.eyebrow": "instant founder · fully packaged, ready to launch",
+    "hero.h1": 'pick your website, <em>we help you</em> become a founder.',
+    "hero.sub": "not an empty template. every product here is already complete, brand, color tone, right down to the product story. just pick the one that fits, we'll guide you until your business is actually live and running.",
+    "hero.ctaPrimary": "browse catalog", "hero.ctaGhost": "need something custom? →",
+    "loading": "loading catalog...",
+    "footer": "founderku · anyone can become a founder, just pick your path",
+    "chip.all": "all",
+    "viewDetail": "view details", "comingSoon": "coming soon", "priceNote": "starting from",
+    "emptyCategory": "no products in this category yet.",
+    "errorLoad": "failed to load the catalog. try refreshing this page.",
+    "cat.landing-page": "landing page", "cat.company-profile": "company profile",
+    "cat.portfolio": "portfolio", "cat.platform-marketplace": "platform & marketplace"
+  },
+  tr: {
+    "nav.layanan": "hizmetler", "nav.tentang": "hakkımızda", "nav.instantFounder": "instant founder", "nav.kontak": "iletişim",
+    "nav.mulaiProyek": "projeye başla",
+    "hero.eyebrow": "instant founder · her şey hazır paketlendi, yayına almaya hazır",
+    "hero.h1": 'web siteni seç, <em>seni founder olmaya</em> biz yardım edelim.',
+    "hero.sub": "boş bir şablon değil. buradaki her ürün eksiksiz hazır, marka, renk tonu, hatta ürün hikayesiyle birlikte. sana en uygun olanı seç, işin gerçekten yayına girip çalışana kadar sana eşlik edelim.",
+    "hero.ctaPrimary": "kataloğa bak", "hero.ctaGhost": "özel bir şey mi lazım? →",
+    "loading": "katalog yükleniyor...",
+    "footer": "founderku · herkes founder olabilir, sen sadece yolunu seç",
+    "chip.all": "tümü",
+    "viewDetail": "detayları gör", "comingSoon": "yakında", "priceNote": "başlangıç fiyatı",
+    "emptyCategory": "bu kategoride henüz ürün yok.",
+    "errorLoad": "katalog yüklenemedi. bu sayfayı yenilemeyi dene.",
+    "cat.landing-page": "açılış sayfası", "cat.company-profile": "şirket profili",
+    "cat.portfolio": "portfolyo", "cat.platform-marketplace": "platform & pazar yeri"
+  }
+};
+
+var fkCurrentLang = 'id';
+try { fkCurrentLang = localStorage.getItem('fk-lang') || 'id'; } catch (e) {}
+
+function fkStoreDict() { return STORE_I18N[fkCurrentLang] || STORE_I18N.id; }
+
+function fkCatLabel(catId, fallbackLabel) {
+  var dict = fkStoreDict();
+  return dict['cat.' + catId] || fallbackLabel;
+}
+
+function applyStoreStaticI18n() {
+  var dict = fkStoreDict();
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var key = el.getAttribute('data-i18n');
+    if (dict[key]) el.textContent = dict[key];
+  });
+  var h1 = document.getElementById('fkStoreH1');
+  if (h1 && dict['hero.h1']) h1.innerHTML = dict['hero.h1'];
+  document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
+    btn.classList.toggle('is-active', btn.getAttribute('data-lang') === fkCurrentLang);
+  });
+  document.documentElement.setAttribute('lang', fkCurrentLang);
+}
+
 (async function(){
   const grid = document.getElementById('katalog');
   const filterBar = document.getElementById('filterBar');
@@ -217,10 +300,11 @@
   }
 
   function cardHTML(p){
-    const catLabel = p.categoryLabel || p.category;
+    var dict = fkStoreDict();
+    const catLabel = fkCatLabel(p.category, p.categoryLabel || p.category);
     const thumbInner = p.thumbnail && !p.thumbnail.includes('placeholder')
-      ? `<img src="${p.thumbnail}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-thumb&quot;><div class=&quot;dot-icon&quot;>◐</div>coming soon</div>'">`
-      : `<div class="placeholder-thumb"><div class="dot-icon">◐</div>coming soon</div>`;
+      ? `<img src="${p.thumbnail}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder-thumb&quot;><div class=&quot;dot-icon&quot;>◐</div>${dict.comingSoon}</div>'">`
+      : `<div class="placeholder-thumb"><div class="dot-icon">◐</div>${dict.comingSoon}</div>`;
     const featClass = p.featured ? ' featured' : '';
     const tags = (p.featureTags || []).slice(0,4).map(t => `<span>${t}</span>`).join('');
     return `
@@ -235,25 +319,27 @@
         <div class="card-desc lowercase">${p.shortDescription || ''}</div>
         <div class="feature-tags lowercase">${tags}</div>
         <div class="card-footer">
-          <div class="price lowercase">${p.priceLabel || money(p.price)}<small>${p.priceNote || 'mulai dari'}</small></div>
-          <span class="view-btn lowercase">lihat detail</span>
+          <div class="price lowercase">${p.priceLabel || money(p.price)}<small>${p.priceNote || dict.priceNote}</small></div>
+          <span class="view-btn lowercase">${dict.viewDetail}</span>
         </div>
       </div>
     </a>`;
   }
 
   function render(){
+    var dict = fkStoreDict();
     const filtered = activeCategory === 'all'
       ? allProducts
       : allProducts.filter(p => p.category === activeCategory);
     grid.innerHTML = filtered.length
       ? filtered.map(cardHTML).join('')
-      : `<div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-soft); font-size:14px;" class="lowercase">belum ada produk di kategori ini.</div>`;
+      : `<div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-soft); font-size:14px;" class="lowercase">${dict.emptyCategory}</div>`;
   }
 
   function renderFilters(){
-    filterBar.innerHTML = `<div class="chip lowercase${activeCategory==='all' ? ' active' : ''}" data-cat="all">semua</div>` +
-      categories.map(c => `<div class="chip lowercase${activeCategory===c.id ? ' active' : ''}" data-cat="${c.id}">${c.label}</div>`).join('');
+    var dict = fkStoreDict();
+    filterBar.innerHTML = `<div class="chip lowercase${activeCategory==='all' ? ' active' : ''}" data-cat="all">${dict['chip.all']}</div>` +
+      categories.map(c => `<div class="chip lowercase${activeCategory===c.id ? ' active' : ''}" data-cat="${c.id}">${fkCatLabel(c.id, c.label)}</div>`).join('');
     filterBar.querySelectorAll('.chip').forEach(chip => {
       chip.addEventListener('click', () => {
         activeCategory = chip.dataset.cat;
@@ -263,6 +349,18 @@
     });
   }
 
+  document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      fkCurrentLang = btn.getAttribute('data-lang');
+      try { localStorage.setItem('fk-lang', fkCurrentLang); } catch (e) {}
+      applyStoreStaticI18n();
+      renderFilters();
+      render();
+    });
+  });
+
+  applyStoreStaticI18n();
+
   try {
     const res = await fetch('data/products.json', { cache: 'no-store' });
     const data = await res.json();
@@ -271,7 +369,7 @@
     renderFilters();
     render();
   } catch (err) {
-    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-soft); font-size:14px;" class="lowercase">gagal memuat katalog. coba refresh halaman ini.</div>`;
+    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-soft); font-size:14px;" class="lowercase">${fkStoreDict().errorLoad}</div>`;
     console.error(err);
   }
 })();

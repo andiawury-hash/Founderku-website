@@ -94,6 +94,7 @@
   .cs-card a.cta:hover { gap: 12px; color: #F2A623; }
 
   .empty-state, .error-state { grid-column: 1/-1; text-align: center; color: #FBF6EE88; font-size: 14.5px; padding: 60px 20px; }
+  .fk-lang-btn.is-active{ background: #FBF6EE !important; color: #1C1B33 !important; }
 </style>
 </head>
 <body>
@@ -106,24 +107,82 @@
     <img src="images/logo-founderku.jpg" alt="Founderku">
     Founderku
   </a>
-  <a href="index.html" class="fk-back">&larr; kembali ke beranda</a>
+  <div style="display:flex; align-items:center; gap:18px;">
+    <a href="index.html" class="fk-back" data-i18n="nav.back">&larr; kembali ke beranda</a>
+    <div id="fkLangSwitch" style="display:flex; align-items:center; gap:4px; flex:none; background:#FBF6EE1A; border-radius:999px; padding:4px;">
+      <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#FBF6EEAA; padding:6px 11px; border-radius:999px; transition:all .2s ease;">ID</button>
+      <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#FBF6EEAA; padding:6px 11px; border-radius:999px; transition:all .2s ease;">EN</button>
+      <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#FBF6EEAA; padding:6px 11px; border-radius:999px; transition:all .2s ease;">TR</button>
+    </div>
+  </div>
 </nav>
 
 <header>
-  <div class="eyebrow">Studi Kasus</div>
-  <h1>Semua project yang udah kelar bareng Founderku</h1>
-  <p>Bukan mockup doang. Ini semua produk yang beneran jalan, dari ide sampai online.</p>
+  <div class="eyebrow" data-i18n="eyebrow">Studi Kasus</div>
+  <h1 data-i18n="h1">Semua project yang udah kelar bareng Founderku</h1>
+  <p data-i18n="sub">Bukan mockup doang. Ini semua produk yang beneran jalan, dari ide sampai online.</p>
 </header>
 
 <main>
   <div class="cs-grid" id="csFullGrid">
-    <div class="empty-state">memuat studi kasus...</div>
+    <div class="empty-state" data-i18n="loading">memuat studi kasus...</div>
   </div>
 </main>
 
 <script>
+var CS_I18N = {
+  id: {
+    "nav.back": "← kembali ke beranda",
+    "eyebrow": "Studi Kasus",
+    "h1": "Semua project yang udah kelar bareng Founderku",
+    "sub": "Bukan mockup doang. Ini semua produk yang beneran jalan, dari ide sampai online.",
+    "loading": "memuat studi kasus...",
+    "empty": "belum ada studi kasus.",
+    "error": "gagal memuat studi kasus.",
+    "linkLabel": "Lihat detail"
+  },
+  en: {
+    "nav.back": "← back to home",
+    "eyebrow": "Case Studies",
+    "h1": "Every project we've completed with Founderku",
+    "sub": "Not just mockups. These are all products that are actually running, from idea to live online.",
+    "loading": "loading case studies...",
+    "empty": "no case studies yet.",
+    "error": "failed to load case studies.",
+    "linkLabel": "View details"
+  },
+  tr: {
+    "nav.back": "← ana sayfaya dön",
+    "eyebrow": "Vaka Analizleri",
+    "h1": "Founderku ile tamamladığımız her proje",
+    "sub": "Sadece maket değil. Bunların hepsi fikirden yayına, gerçekten çalışan ürünler.",
+    "loading": "vaka analizleri yükleniyor...",
+    "empty": "henüz vaka analizi yok.",
+    "error": "vaka analizleri yüklenemedi.",
+    "linkLabel": "Detayları gör"
+  }
+};
+
+var fkCurrentLang = 'id';
+try { fkCurrentLang = localStorage.getItem('fk-lang') || 'id'; } catch (e) {}
+
+function fkCsDict() { return CS_I18N[fkCurrentLang] || CS_I18N.id; }
+
+function applyCsStaticI18n() {
+  var dict = fkCsDict();
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var key = el.getAttribute('data-i18n');
+    if (dict[key]) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
+    btn.classList.toggle('is-active', btn.getAttribute('data-lang') === fkCurrentLang);
+  });
+  document.documentElement.setAttribute('lang', fkCurrentLang);
+}
+
 (function () {
   var grid = document.getElementById('csFullGrid');
+  var caseStudiesData = null;
 
   function escapeHtml(str) {
     return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) {
@@ -131,41 +190,59 @@
     });
   }
 
+  function renderGrid() {
+    var dict = fkCsDict();
+    if (!caseStudiesData) return;
+    var items = caseStudiesData.slice().sort(function (a, b) {
+      return (a.order || 0) - (b.order || 0);
+    });
+    if (!items.length) {
+      grid.innerHTML = '<div class="empty-state">' + dict.empty + '</div>';
+      return;
+    }
+
+    grid.innerHTML = items.map(function (item) {
+      var tagsHtml = (item.tags || []).map(function (tag) {
+        return '<span class="tag">' + escapeHtml(tag) + '</span>';
+      }).join('');
+
+      var logoInner = item.logo
+        ? '<img src="' + escapeHtml(item.logo) + '" alt="' + escapeHtml(item.name) + ' logo" loading="lazy" decoding="async"' + (item.roundLogo ? ' style="border-radius:50%;"' : '') + '>'
+        : '<strong>' + escapeHtml(item.name) + '</strong>';
+
+      var linkAttrs = item.external ? 'target="_blank" rel="noopener"' : '';
+
+      return (
+        '<div class="cs-card">' +
+          '<div class="logo-chip">' + logoInner + '</div>' +
+          '<p class="desc">' + escapeHtml(item.description) + '</p>' +
+          '<div class="tags">' + tagsHtml + '</div>' +
+          '<div class="note">' + escapeHtml(item.note) + '</div>' +
+          '<a href="' + escapeHtml(item.linkUrl) + '" ' + linkAttrs + ' class="cta">' + escapeHtml(item.linkLabel || dict.linkLabel) + ' &rarr;</a>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      fkCurrentLang = btn.getAttribute('data-lang');
+      try { localStorage.setItem('fk-lang', fkCurrentLang); } catch (e) {}
+      applyCsStaticI18n();
+      renderGrid();
+    });
+  });
+
+  applyCsStaticI18n();
+
   fetch('data/case-studies.json')
     .then(function (res) { if (!res.ok) throw new Error('gagal memuat data'); return res.json(); })
     .then(function (data) {
-      var items = (data.caseStudies || []).slice().sort(function (a, b) {
-        return (a.order || 0) - (b.order || 0);
-      });
-      if (!items.length) {
-        grid.innerHTML = '<div class="empty-state">belum ada studi kasus.</div>';
-        return;
-      }
-
-      grid.innerHTML = items.map(function (item) {
-        var tagsHtml = (item.tags || []).map(function (tag) {
-          return '<span class="tag">' + escapeHtml(tag) + '</span>';
-        }).join('');
-
-        var logoInner = item.logo
-          ? '<img src="' + escapeHtml(item.logo) + '" alt="' + escapeHtml(item.name) + ' logo" loading="lazy" decoding="async"' + (item.roundLogo ? ' style="border-radius:50%;"' : '') + '>'
-          : '<strong>' + escapeHtml(item.name) + '</strong>';
-
-        var linkAttrs = item.external ? 'target="_blank" rel="noopener"' : '';
-
-        return (
-          '<div class="cs-card">' +
-            '<div class="logo-chip">' + logoInner + '</div>' +
-            '<p class="desc">' + escapeHtml(item.description) + '</p>' +
-            '<div class="tags">' + tagsHtml + '</div>' +
-            '<div class="note">' + escapeHtml(item.note) + '</div>' +
-            '<a href="' + escapeHtml(item.linkUrl) + '" ' + linkAttrs + ' class="cta">' + escapeHtml(item.linkLabel || 'Lihat detail') + ' &rarr;</a>' +
-          '</div>'
-        );
-      }).join('');
+      caseStudiesData = data.caseStudies || [];
+      renderGrid();
     })
     .catch(function (err) {
-      grid.innerHTML = '<div class="error-state">gagal memuat studi kasus.</div>';
+      grid.innerHTML = '<div class="error-state">' + fkCsDict().error + '</div>';
       console.error('case studies fetch error:', err);
     });
 })();
