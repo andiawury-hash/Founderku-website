@@ -87,16 +87,42 @@
       "name": "Kelasin",
       "logo": "images/case-studies/kelasin-logo.png",
       "roundLogo": true,
-      "description": "Kelasin adalah paket starter platform belajar skill harian, dua sisi: pembelajar yang butuh solusi cepat (servis motor, jahit, masak, dll) dan pengajar orang biasa yang punya skill tapi belum punya cara monetisasi. Beda dari platform kursus formal, kelas di sini pendek (15-30 menit), murah (mulai Rp 5.000), dan direkam pengajar langsung pake HP.",
-      "tags": [
-        "katalog interaktif",
-        "search & filter kategori",
-        "preview video contoh",
-        "alur pesan via whatsapp"
-      ],
-      "note": "platform kelas mikro 15-30 menit buat skill harian, direkam pengajar biasa pake HP. desain sticky-note khas, katalog interaktif, alur pesan via whatsapp.",
+      "description": {
+        "id": "Kelasin adalah paket starter platform belajar skill harian, dua sisi: pembelajar yang butuh solusi cepat (servis motor, jahit, masak, dll) dan pengajar orang biasa yang punya skill tapi belum punya cara monetisasi. Beda dari platform kursus formal, kelas di sini pendek (15-30 menit), murah (mulai Rp 5.000), dan direkam pengajar langsung pake HP.",
+        "en": "Kelasin is a starter package for a daily skill learning platform, two-sided: learners who need quick solutions (motorcycle repair, sewing, cooking, etc.) and ordinary instructors who have skills but haven't found ways to monetize. Different from formal course platforms, classes here are short (15-30 minutes), affordable (starting from Rp 5,000), and recorded directly by instructors using their phones.",
+        "tr": "Kelasin, günlük beceri öğrenme platformunun başlangıç paketi, iki taraflı: hızlı çözüme ihtiyaç duyan öğrenenler (motor onarımı, dikiş, yemek pişirme, vb.) ve beceri sahibi ancak para kazanma yolu bulamayan sıradan öğretmenler. Resmi kurs platformlarından farklı olarak, buradaki dersler kısa (15-30 dakika), uygun fiyatlı (5.000 TL'den başlayarak) ve öğretmenler tarafından doğrudan telefonları kullanılarak kaydedilir."
+      },
+      "tags": {
+        "id": [
+          "katalog interaktif",
+          "search & filter kategori",
+          "preview video contoh",
+          "alur pesan via whatsapp"
+        ],
+        "en": [
+          "interactive catalog",
+          "search and filter by category",
+          "example video preview",
+          "messaging flow via WhatsApp"
+        ],
+        "tr": [
+          "interaktif katalog",
+          "kategori arama ve filtreleme",
+          "örnek video önizlemesi",
+          "WhatsApp üzerinden mesajlaşma akışı"
+        ]
+      },
+      "note": {
+        "id": "platform kelas mikro 15-30 menit buat skill harian, direkam pengajar biasa pake HP. desain sticky-note khas, katalog interaktif, alur pesan via whatsapp.",
+        "en": "micro-class platform for 15-30 minute daily skills, recorded by ordinary instructors using phones. distinctive sticky-note design, interactive catalog, messaging flow via WhatsApp.",
+        "tr": "15-30 dakikalık günlük beceriler için mikro-klass platformu, sıradan öğretmenler tarafından telefonları kullanılarak kaydedilir. karakteristik yapışkan not tasarımı, interaktif katalog, WhatsApp üzerinden mesajlaşma akışı."
+      },
       "linkUrl": "https://founderku.github.io/Kelasin/index",
-      "linkLabel": "Kunjungi Kelasin",
+      "linkLabel": {
+        "id": "Kunjungi Kelasin",
+        "en": "Visit Kelasin",
+        "tr": "Kelasin'i Ziyaret Edin"
+      },
       "external": true,
       "order": 3
     },
