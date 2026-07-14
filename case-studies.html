@@ -94,7 +94,7 @@
   .cs-card a.cta:hover { gap: 12px; color: #F2A623; }
 
   .empty-state, .error-state { grid-column: 1/-1; text-align: center; color: #FBF6EE88; font-size: 14.5px; padding: 60px 20px; }
-  .fk-lang-btn.is-active{ background: #FBF6EE !important; color: #1C1B33 !important; }
+  .fk-lang-btn.is-active{ background: #1C1B33 !important; color: #FBF6EE !important; }
 </style>
 </head>
 <body>
@@ -107,15 +107,14 @@
     <img src="images/logo-founderku.jpg" alt="Founderku">
     Founderku
   </a>
-  <div style="display:flex; align-items:center; gap:18px;">
-    <a href="index.html" class="fk-back" data-i18n="nav.back">&larr; kembali ke beranda</a>
-    <div id="fkLangSwitch" style="display:flex; align-items:center; gap:4px; flex:none; background:#FBF6EE1A; border-radius:999px; padding:4px;">
-      <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#FBF6EEAA; padding:6px 11px; border-radius:999px; transition:all .2s ease;">ID</button>
-      <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#FBF6EEAA; padding:6px 11px; border-radius:999px; transition:all .2s ease;">EN</button>
-      <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#FBF6EEAA; padding:6px 11px; border-radius:999px; transition:all .2s ease;">TR</button>
-    </div>
-  </div>
+  <a href="index.html" class="fk-back" data-i18n="nav.back">&larr; kembali ke beranda</a>
 </nav>
+
+<div id="fkLangSwitch" style="position:fixed; bottom:20px; right:20px; z-index:9999; display:flex; align-items:center; gap:4px; background:#FBF6EE; border-radius:999px; padding:5px; box-shadow:0 10px 30px -8px #00000066, 0 2px 8px -2px #00000040; border:1px solid #FBF6EE22;">
+  <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:7px 12px; border-radius:999px; transition:all .2s ease;">ID</button>
+  <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:7px 12px; border-radius:999px; transition:all .2s ease;">EN</button>
+  <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:7px 12px; border-radius:999px; transition:all .2s ease;">TR</button>
+</div>
 
 <header>
   <div class="eyebrow" data-i18n="eyebrow">Studi Kasus</div>
@@ -163,8 +162,8 @@ var CS_I18N = {
   }
 };
 
-var fkCurrentLang = 'id';
-try { fkCurrentLang = localStorage.getItem('fk-lang') || 'id'; } catch (e) {}
+var fkCurrentLang = 'en';
+try { fkCurrentLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {}
 
 function fkCsDict() { return CS_I18N[fkCurrentLang] || CS_I18N.id; }
 

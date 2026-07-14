@@ -242,23 +242,22 @@
       <img src="images/logo-founderku.jpg" alt="Founderku" width="30" height="30" loading="eager" decoding="async" style="width:30px; height:30px; border-radius:8px; object-fit:cover;">
       <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:19px; color:#1C1B33; letter-spacing:-0.01em;">Founderku</div>
     </div>
-    <div style="display:flex; align-items:center; gap:16px; flex:none;">
-      <div class="fk-nav-links" style="display:flex; align-items:center; gap:38px; font-size:15px; font-weight:500; color:#1C1B33;">
-        <a href="#kenapa" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.kenapa">Kenapa</a>
-        <a href="#layanan" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.layanan">Layanan</a>
-        <a href="#proses" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.proses">Proses</a>
-        <a href="#proyek" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.proyek">Project</a>
-        <a href="#faq" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.faq">FAQ</a>
-        <a href="#generator" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.generator">Generator</a>
-        <a href="store.html" class="fk-link" style="text-decoration:none; color:#E15C3E; font-weight:700;" data-i18n="nav.instantFounder">Instant Founder</a>
-        <a href="#cta" class="fk-nav-cta" style="text-decoration:none; color:#1C1B33; padding:10px 20px; border-radius:999px; font-weight:600; border:1px solid #1C1B3333;" data-i18n="nav.ngobrol">Ngobrol</a>
-      </div>
-      <div id="fkLangSwitch" style="display:flex; align-items:center; gap:4px; flex:none; background:#1C1B330D; border-radius:999px; padding:4px;">
-        <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:6px 11px; border-radius:999px; transition:all .2s ease;">ID</button>
-        <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:6px 11px; border-radius:999px; transition:all .2s ease;">EN</button>
-        <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:6px 11px; border-radius:999px; transition:all .2s ease;">TR</button>
-      </div>
+    <div class="fk-nav-links" style="display:flex; align-items:center; gap:38px; font-size:15px; font-weight:500; color:#1C1B33;">
+      <a href="#kenapa" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.kenapa">Kenapa</a>
+      <a href="#layanan" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.layanan">Layanan</a>
+      <a href="#proses" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.proses">Proses</a>
+      <a href="#proyek" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.proyek">Project</a>
+      <a href="#faq" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.faq">FAQ</a>
+      <a href="#generator" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.generator">Generator</a>
+      <a href="store.html" class="fk-link" style="text-decoration:none; color:#E15C3E; font-weight:700;" data-i18n="nav.instantFounder">Instant Founder</a>
+      <a href="#cta" class="fk-nav-cta" style="text-decoration:none; color:#1C1B33; padding:10px 20px; border-radius:999px; font-weight:600; border:1px solid #1C1B3333;" data-i18n="nav.ngobrol">Ngobrol</a>
     </div>
+  </div>
+
+  <div id="fkLangSwitch" style="position:fixed; bottom:20px; right:20px; z-index:9999; display:flex; align-items:center; gap:4px; background:#FBF6EE; border-radius:999px; padding:5px; box-shadow:0 10px 30px -8px #1C1B334D, 0 2px 8px -2px #1C1B3326; border:1px solid #1C1B331A;">
+    <button type="button" class="fk-lang-btn" data-lang="id" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:7px 12px; border-radius:999px; transition:all .2s ease;">ID</button>
+    <button type="button" class="fk-lang-btn" data-lang="en" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:7px 12px; border-radius:999px; transition:all .2s ease;">EN</button>
+    <button type="button" class="fk-lang-btn" data-lang="tr" style="border:none; background:transparent; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#1C1B3399; padding:7px 12px; border-radius:999px; transition:all .2s ease;">TR</button>
   </div>
 
 
@@ -1556,18 +1555,23 @@
     }
   };
 
-  function rebuildHeroTitle(text) {
+  function rebuildHeroTitle(text, animate) {
     var titleEl = document.getElementById('fkHeroTitle');
     if (!titleEl) return;
     var svgEl = titleEl.querySelector('svg');
     titleEl.setAttribute('aria-label', text);
+    var prefersReducedChar = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var html = '<span aria-hidden="true">';
     var delayIndex = 0;
     var words = text.split(' ');
     for (var w = 0; w < words.length; w++) {
       html += '<span style="display:inline-block; white-space:nowrap;">';
       for (var i = 0; i < words[w].length; i++) {
-        html += '<span class="fk-char fk-char-in" style="transition-delay:0s;">' + words[w][i] + '</span>';
+        if (animate && !prefersReducedChar) {
+          html += '<span class="fk-char" style="transition-delay:' + (delayIndex * 0.03) + 's;">' + words[w][i] + '</span>';
+        } else {
+          html += '<span class="fk-char fk-char-in" style="transition-delay:0s;">' + words[w][i] + '</span>';
+        }
         delayIndex++;
       }
       html += '</span>';
@@ -1576,6 +1580,11 @@
     html += '</span>';
     titleEl.innerHTML = html;
     if (svgEl) titleEl.appendChild(svgEl);
+    if (animate && !prefersReducedChar) {
+      setTimeout(function () {
+        titleEl.querySelectorAll('.fk-char').forEach(function (c) { c.classList.add('fk-char-in'); });
+      }, 80);
+    }
   }
 
   function rebuildKenapaText(text) {
@@ -1600,7 +1609,7 @@
     });
     if (!(isInitial && lang === 'id')) {
       var heroEl = document.querySelector('[data-i18n-plain="hero.h1"]');
-      if (heroEl && dict['hero.h1']) rebuildHeroTitle(dict['hero.h1']);
+      if (heroEl && dict['hero.h1']) rebuildHeroTitle(dict['hero.h1'], !!isInitial);
       if (dict['kenapa.text']) rebuildKenapaText(dict['kenapa.text']);
     }
 
@@ -1617,8 +1626,8 @@
     });
   });
 
-  var savedLang = 'id';
-  try { savedLang = localStorage.getItem('fk-lang') || 'id'; } catch (e) {}
+  var savedLang = 'en';
+  try { savedLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {}
   applyLanguage(savedLang, true);
 })();
 </script>
