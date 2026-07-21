@@ -278,11 +278,11 @@
           "kullanıma hazır tek HTML dosyası"
         ]
       },
-      "thumbnail": "images/products/placeholder.png",
+      "thumbnail": "images/products/nomadbuds-web-app-cari-teman-traveling-lokal.jpg",
       "gallery": [
-        "images/products/placeholder.png"
+        "images/products/nomadbuds-web-app-cari-teman-traveling-lokal.jpg"
       ],
-      "liveUrl": "",
+      "liveUrl": "https://sho462.github.io/NomadBuds/",
       "whatsappMessage": {
         "id": "Halo, saya mau pesan NomadBuds - Web App Cari Teman Traveling & Lokal",
         "en": "Hi, I want to order NomadBuds - Web App Cari Teman Traveling & Lokal",
