@@ -424,8 +424,9 @@
       }
       grid.innerHTML = items.map(cardHTML).join('');
 
-      window.fkRerenderProductPreview = function () {
-        try { fkCurrentLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {}
+      window.fkRerenderProductPreview = function (lang) {
+        if (lang) { fkCurrentLang = lang; }
+        else { try { fkCurrentLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {} }
         const nodes = Array.prototype.slice.call(grid.querySelectorAll('.fk-prod-card'));
         nodes.forEach(function (node, i) {
           const p = items[i];
@@ -1400,8 +1401,9 @@
         fkWireCircuitDraw(grid);
         fkWireMagnetic(grid);
 
-        window.fkRerenderCaseStudies = function () {
-          try { fkCurrentLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {}
+        window.fkRerenderCaseStudies = function (lang) {
+          if (lang) { fkCurrentLang = lang; }
+          else { try { fkCurrentLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {} }
           var nodes = Array.prototype.slice.call(grid.querySelectorAll('.fk-proj-card'));
           nodes.forEach(function (node, i) {
             var item = items[i];
@@ -1736,8 +1738,8 @@
       if (dict['kenapa.text']) rebuildKenapaText(dict['kenapa.text']);
     }
 
-    if (window.fkRerenderProductPreview) window.fkRerenderProductPreview();
-    if (window.fkRerenderCaseStudies) window.fkRerenderCaseStudies();
+    if (window.fkRerenderProductPreview) window.fkRerenderProductPreview(lang);
+    if (window.fkRerenderCaseStudies) window.fkRerenderCaseStudies(lang);
 
     document.querySelectorAll('.fk-lang-btn').forEach(function (btn) {
       btn.classList.toggle('is-active', btn.getAttribute('data-lang') === lang);
