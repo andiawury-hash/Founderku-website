@@ -388,6 +388,11 @@
       if (lang === 'tr') return '\u20ba' + thousands(Math.round(priceIDR / TRY_RATE));
       return 'Rp ' + thousands(priceIDR);
     }
+    function getDisplayPrice(p, lang) {
+      if (lang === 'en' && p.priceUSD) return '$' + Number(p.priceUSD).toLocaleString('en-US');
+      if (lang === 'tr' && p.priceTRY) return '\u20ba' + Number(p.priceTRY).toLocaleString('tr-TR');
+      return formatPriceLang(p.price, lang);
+    }
     function cardHTML(p){
       const catLabel = p.categoryLabel || p.category;
       const pName = pickLangText(p.name);
@@ -404,7 +409,7 @@
           <div style="padding:18px 20px 20px;">
             <div style="font-size:11px; font-weight:700; color:#E15C3E; text-transform:uppercase; letter-spacing:0.05em;">${catLabel}</div>
             <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:#FBF6EE; margin-top:6px;">${pName}</div>
-            <div style="font-size:13px; color:#FBF6EE99; margin-top:10px; font-weight:700;">${formatPriceLang(p.price, fkCurrentLang)}</div>
+            <div style="font-size:13px; color:#FBF6EE99; margin-top:10px; font-weight:700;">${getDisplayPrice(p, fkCurrentLang)}</div>
           </div>
         </a>
       </div>`;
@@ -1442,6 +1447,7 @@
 (function () {
   var I18N = {
     id: {
+      "pageTitle": "Founderku · Semua bisa jadi founder",
       "nav.kenapa": "Kenapa", "nav.layanan": "Layanan", "nav.proses": "Proses", "nav.proyek": "Project",
       "nav.faq": "FAQ", "nav.generator": "Generator", "nav.instantFounder": "Founder Starterpack", "nav.ngobrol": "Ngobrol",
       "hero.h1": "Semua bisa jadi founder.",
@@ -1506,6 +1512,7 @@
       "footer.copy": "Founderku · 2026"
     },
     en: {
+      "pageTitle": "Founderku · Anyone can become a founder",
       "nav.kenapa": "Why", "nav.layanan": "Services", "nav.proses": "Process", "nav.proyek": "Projects",
       "nav.faq": "FAQ", "nav.generator": "Generator", "nav.instantFounder": "Founder Starterpack", "nav.ngobrol": "Chat",
       "hero.h1": "Anyone can become a founder.",
@@ -1570,6 +1577,7 @@
       "footer.copy": "Founderku · 2026"
     },
     tr: {
+      "pageTitle": "Founderku · Herkes founder olabilir",
       "nav.kenapa": "Neden", "nav.layanan": "Hizmetler", "nav.proses": "Süreç", "nav.proyek": "Projeler",
       "nav.faq": "SSS", "nav.generator": "Üretici", "nav.instantFounder": "Founder Starterpack", "nav.ngobrol": "Sohbet",
       "hero.h1": "Herkes founder olabilir.",
@@ -1679,6 +1687,7 @@
 
   function applyLanguage(lang, isInitial) {
     var dict = I18N[lang] || I18N.id;
+    if (dict.pageTitle) document.title = dict.pageTitle;
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n');
       if (dict[key]) el.textContent = dict[key];

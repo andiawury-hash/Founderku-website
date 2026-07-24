@@ -159,7 +159,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="logo">founder<span>ku</span></a>
+  <a href="/" class="logo">founder<span>ku</span></a>
   <a href="index.html#cta" class="nav-cta lowercase" data-i18n="nav.mulaiProyek">mulai proyek</a>
 </nav>
 
@@ -315,6 +315,12 @@ function applyProductStaticI18n() {
     if (lang === 'tr') return '₺' + thousands(Math.round(priceIDR / TRY_RATE));
     return 'Rp ' + thousands(priceIDR);
   }
+
+  function getDisplayPrice(p, lang) {
+    if (lang === 'en' && p.priceUSD) return '$' + Number(p.priceUSD).toLocaleString('en-US');
+    if (lang === 'tr' && p.priceTRY) return '₺' + Number(p.priceTRY).toLocaleString('tr-TR');
+    return formatPriceLang(p.price, lang);
+  }
   function escapeHtml(s){
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
@@ -424,7 +430,7 @@ function applyProductStaticI18n() {
 
     document.getElementById('buyCat').textContent = catLabel;
     document.getElementById('buyTitle').textContent = pickLangText(p.name);
-    document.getElementById('buyPrice').textContent = formatPriceLang(p.price, fkCurrentLang);
+    document.getElementById('buyPrice').textContent = getDisplayPrice(p, fkCurrentLang);
 
     const btnVisit = document.getElementById('btnVisit');
     if (p.liveUrl) {

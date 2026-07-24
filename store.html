@@ -180,7 +180,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="logo">founder<span>ku</span></a>
+  <a href="/" class="logo">founder<span>ku</span></a>
   <div style="display:flex; align-items:center; gap:20px;">
     <div class="nav-links">
       <a href="index.html#layanan" data-i18n="nav.layanan">layanan</a>
@@ -227,6 +227,7 @@
 <script>
 var STORE_I18N = {
   id: {
+    "pageTitle": "founderku · founder starterpack",
     "nav.layanan": "layanan", "nav.tentang": "tentang", "nav.instantFounder": "founder starterpack", "nav.kontak": "kontak",
     "nav.mulaiProyek": "mulai proyek",
     "hero.eyebrow": "founder starterpack · paket lengkap, tinggal jalan",
@@ -243,6 +244,7 @@ var STORE_I18N = {
     "cat.portfolio": "portfolio", "cat.platform-marketplace": "platform & marketplace"
   },
   en: {
+    "pageTitle": "founderku · founder starterpack",
     "nav.layanan": "services", "nav.tentang": "about", "nav.instantFounder": "founder starterpack", "nav.kontak": "contact",
     "nav.mulaiProyek": "start a project",
     "hero.eyebrow": "founder starterpack · fully packaged, ready to launch",
@@ -259,6 +261,7 @@ var STORE_I18N = {
     "cat.portfolio": "portfolio", "cat.platform-marketplace": "platform & marketplace"
   },
   tr: {
+    "pageTitle": "founderku · founder starterpack",
     "nav.layanan": "hizmetler", "nav.tentang": "hakkımızda", "nav.instantFounder": "founder starterpack", "nav.kontak": "iletişim",
     "nav.mulaiProyek": "projeye başla",
     "hero.eyebrow": "founder starterpack · her şey hazır paketlendi, yayına almaya hazır",
@@ -288,6 +291,7 @@ function fkCatLabel(catId, fallbackLabel) {
 
 function applyStoreStaticI18n() {
   var dict = fkStoreDict();
+  if (dict.pageTitle) document.title = dict.pageTitle;
   document.querySelectorAll('[data-i18n]').forEach(function (el) {
     var key = el.getAttribute('data-i18n');
     if (dict[key]) el.textContent = dict[key];
@@ -334,6 +338,12 @@ function applyStoreStaticI18n() {
     return 'Rp ' + thousands(priceIDR);
   }
 
+  function getDisplayPrice(p, lang) {
+    if (lang === 'en' && p.priceUSD) return '$' + Number(p.priceUSD).toLocaleString('en-US');
+    if (lang === 'tr' && p.priceTRY) return '₺' + Number(p.priceTRY).toLocaleString('tr-TR');
+    return formatPriceLang(p.price, lang);
+  }
+
   function cardHTML(p){
     var dict = fkStoreDict();
     const catLabel = fkCatLabel(p.category, p.categoryLabel || p.category);
@@ -354,7 +364,7 @@ function applyStoreStaticI18n() {
         <div class="card-desc lowercase">${pickLangText(p.shortDescription)}</div>
         <div class="feature-tags lowercase">${tags}</div>
         <div class="card-footer">
-          <div class="price lowercase">${formatPriceLang(p.price, fkCurrentLang)}<small>${p.priceNote || dict.priceNote}</small></div>
+          <div class="price lowercase">${getDisplayPrice(p, fkCurrentLang)}<small>${p.priceNote || dict.priceNote}</small></div>
           <span class="view-btn lowercase">${dict.viewDetail}</span>
         </div>
       </div>

@@ -107,11 +107,11 @@
 <div class="fk-glow fk-glow-2"></div>
 
 <nav>
-  <a href="index.html" class="fk-nav-brand">
+  <a href="/" class="fk-nav-brand">
     <img src="images/logo-founderku.jpg" alt="Founderku">
     Founderku
   </a>
-  <a href="index.html" class="fk-back" data-i18n="nav.back">&larr; kembali ke beranda</a>
+  <a href="/" class="fk-back" data-i18n="nav.back">&larr; kembali ke beranda</a>
 </nav>
 
 <div id="fkLangSwitch" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
@@ -142,6 +142,7 @@
 var CS_I18N = {
   id: {
     "nav.back": "← kembali ke beranda",
+    "pageTitle": "Semua Studi Kasus · Founderku",
     "eyebrow": "Studi Kasus",
     "h1": "Semua project yang udah kelar bareng Founderku",
     "sub": "Bukan mockup doang. Ini semua produk yang beneran jalan, dari ide sampai online.",
@@ -152,6 +153,7 @@ var CS_I18N = {
   },
   en: {
     "nav.back": "← back to home",
+    "pageTitle": "All Case Studies · Founderku",
     "eyebrow": "Case Studies",
     "h1": "Every project we've completed with Founderku",
     "sub": "Not just mockups. These are all products that are actually running, from idea to live online.",
@@ -162,6 +164,7 @@ var CS_I18N = {
   },
   tr: {
     "nav.back": "← ana sayfaya dön",
+    "pageTitle": "Tüm Vaka Analizleri · Founderku",
     "eyebrow": "Vaka Analizleri",
     "h1": "Founderku ile tamamladığımız her proje",
     "sub": "Sadece maket değil. Bunların hepsi fikirden yayına, gerçekten çalışan ürünler.",
@@ -179,6 +182,7 @@ function fkCsDict() { return CS_I18N[fkCurrentLang] || CS_I18N.id; }
 
 function applyCsStaticI18n() {
   var dict = fkCsDict();
+  if (dict.pageTitle) document.title = dict.pageTitle;
   document.querySelectorAll('[data-i18n]').forEach(function (el) {
     var key = el.getAttribute('data-i18n');
     if (dict[key]) el.innerHTML = dict[key];
