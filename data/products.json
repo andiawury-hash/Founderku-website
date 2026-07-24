@@ -11,6 +11,8 @@
       "category": "platform-marketplace",
       "categoryLabel": "platform & marketplace",
       "price": 12000000,
+      "priceUSD": 672,
+      "priceTRY": 31620,
       "priceLabel": "Rp 12.000.000",
       "priceNote": "mulai dari",
       "featured": true,
