@@ -267,6 +267,10 @@
     <details style="margin-bottom:22px;">
       <summary class="lowercase" style="cursor:pointer; font-weight:700; font-size:13px; color:var(--ink-soft, #6b6880); margin-bottom:12px;">lihat / edit versi english</summary>
       <div class="field">
+        <label class="lowercase">nama produk · english</label>
+        <input type="text" id="fNameEn">
+      </div>
+      <div class="field">
         <label class="lowercase">deskripsi singkat · english</label>
         <textarea id="fShortDescEn"></textarea>
       </div>
@@ -286,6 +290,10 @@
 
     <details style="margin-bottom:22px;">
       <summary class="lowercase" style="cursor:pointer; font-weight:700; font-size:13px; color:var(--ink-soft, #6b6880); margin-bottom:12px;">lihat / edit versi türkçe</summary>
+      <div class="field">
+        <label class="lowercase">nama produk · türkçe</label>
+        <input type="text" id="fNameTr">
+      </div>
       <div class="field">
         <label class="lowercase">deskripsi singkat · türkçe</label>
         <textarea id="fShortDescTr"></textarea>
@@ -577,7 +585,7 @@ function renderProductList(){
     <div class="product-row">
       ${p.thumbnail && !p.thumbnail.includes('placeholder') ? `<img src="${p.thumbnail}?t=${Date.now()}">` : `<div class="no-img lowercase">no image</div>`}
       <div class="info">
-        <div class="name">${p.name}${p.featured ? '<span class="featured-badge lowercase">unggulan</span>' : ''}</div>
+        <div class="name">${langText(p.name, 'id')}${p.featured ? '<span class="featured-badge lowercase">unggulan</span>' : ''}</div>
         <div class="meta lowercase">${p.categoryLabel || p.category} &middot; ${p.priceLabel || p.price}</div>
       </div>
       <div class="actions">
@@ -613,7 +621,9 @@ function openForm(product){
   pendingImageBase64 = null;
   pendingImageExt = null;
   document.getElementById('formTitle').textContent = product ? 'edit produk' : 'tambah produk';
-  document.getElementById('fName').value = product ? product.name : '';
+  document.getElementById('fName').value = product ? langText(product.name, 'id') : '';
+  document.getElementById('fNameEn').value = product ? langText(product.name, 'en') : '';
+  document.getElementById('fNameTr').value = product ? langText(product.name, 'tr') : '';
   document.getElementById('fSlug').value = product ? product.slug : '';
   document.getElementById('fCategory').value = product ? product.category : 'landing-page';
   document.getElementById('fPrice').value = product ? product.price : '';
@@ -673,11 +683,11 @@ async function translateProductFields(){
   const btn = document.getElementById('translateBtn');
   const statusEl = document.getElementById('translateStatus');
 
-  const name = document.getElementById('fName').value.trim();
+  const nameId = document.getElementById('fName').value.trim();
   const shortDescription = document.getElementById('fShortDesc').value.trim();
   const fullDescription = document.getElementById('fFullDesc').value.trim();
   const featureTags = document.getElementById('fFeatures').value.split(',').map(s => s.trim()).filter(Boolean);
-  const whatsappMessage = document.getElementById('fWaMsg').value.trim() || ('Halo, saya mau pesan ' + name);
+  const whatsappMessage = document.getElementById('fWaMsg').value.trim() || ('Halo, saya mau pesan ' + nameId);
 
   if (!shortDescription && !fullDescription){
     statusEl.style.display = 'block';
@@ -694,11 +704,13 @@ async function translateProductFields(){
 
   try {
     const data = await callTranslateWorker(
-      name,
-      { shortDescription, fullDescription, whatsappMessage },
+      nameId,
+      { name: nameId, shortDescription, fullDescription, whatsappMessage },
       { featureTags }
     );
 
+    document.getElementById('fNameEn').value = data.en.textFields.name || '';
+    document.getElementById('fNameTr').value = data.tr.textFields.name || '';
     document.getElementById('fShortDescEn').value = data.en.textFields.shortDescription || '';
     document.getElementById('fFullDescEn').value = data.en.textFields.fullDescription || '';
     document.getElementById('fFeaturesEn').value = (data.en.arrayFields.featureTags || []).join(', ');
@@ -1071,7 +1083,9 @@ async function deleteCaseStudy(id){
 }
 
 async function saveProduct(){
-  const name = document.getElementById('fName').value.trim();
+  const nameId = document.getElementById('fName').value.trim();
+  const nameEn = document.getElementById('fNameEn').value.trim();
+  const nameTr = document.getElementById('fNameTr').value.trim();
   const slug = document.getElementById('fSlug').value.trim();
   const category = document.getElementById('fCategory').value;
   const categoryLabel = document.getElementById('fCategory').selectedOptions[0].textContent;
@@ -1087,18 +1101,19 @@ async function saveProduct(){
   const featuresEn = document.getElementById('fFeaturesEn').value.split(',').map(s => s.trim()).filter(Boolean);
   const featuresTr = document.getElementById('fFeaturesTr').value.split(',').map(s => s.trim()).filter(Boolean);
 
+  const name = (nameEn || nameTr) ? { id: nameId, en: nameEn, tr: nameTr } : nameId;
   const shortDescription = (shortDescEn || shortDescTr) ? { id: shortDescId, en: shortDescEn, tr: shortDescTr } : shortDescId;
   const fullDescription = (fullDescEn || fullDescTr) ? { id: fullDescId, en: fullDescEn, tr: fullDescTr } : fullDescId;
   const featureTags = (featuresEn.length || featuresTr.length) ? { id: featuresId, en: featuresEn, tr: featuresTr } : featuresId;
 
   const liveUrl = document.getElementById('fLiveUrl').value.trim();
-  const waMsgId = document.getElementById('fWaMsg').value.trim() || ('Halo, saya mau pesan ' + name);
+  const waMsgId = document.getElementById('fWaMsg').value.trim() || ('Halo, saya mau pesan ' + nameId);
   const waMsgEn = document.getElementById('fWaMsgEn').value.trim();
   const waMsgTr = document.getElementById('fWaMsgTr').value.trim();
   const whatsappMessage = (waMsgEn || waMsgTr) ? { id: waMsgId, en: waMsgEn, tr: waMsgTr } : waMsgId;
   const featured = document.getElementById('fFeatured').checked;
 
-  if (!name || !slug){
+  if (!nameId || !slug){
     setFormStatus('error', 'nama dan slug wajib diisi.');
     return;
   }
@@ -1120,7 +1135,7 @@ async function saveProduct(){
       setFormStatus('info', 'mengupload gambar...');
       const imgPath = `images/products/${slug}.${pendingImageExt}`;
       const existingImg = await ghGetFile(imgPath);
-      await ghPutFile(imgPath, pendingImageBase64, `Update image for ${name}`, existingImg ? existingImg.sha : null);
+      await ghPutFile(imgPath, pendingImageBase64, `Update image for ${nameId}`, existingImg ? existingImg.sha : null);
       thumbnailPath = imgPath;
     }
 
@@ -1154,7 +1169,7 @@ async function saveProduct(){
     setFormStatus('info', 'menyimpan data produk...');
     const jsonStr = JSON.stringify(productsData, null, 2);
     const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
-    const result = await ghPutFile('data/products.json', base64Content, `${editingId ? 'Update' : 'Add'} product: ${name}`, productsSha);
+    const result = await ghPutFile('data/products.json', base64Content, `${editingId ? 'Update' : 'Add'} product: ${nameId}`, productsSha);
     productsSha = result.content.sha;
 
     setFormStatus('success', 'produk berhasil disimpan.');
@@ -1171,7 +1186,7 @@ async function saveProduct(){
 async function deleteProduct(id){
   const p = productsData.products.find(x => x.id === id);
   if (!p) return;
-  if (!confirm(`Yakin mau hapus "${p.name}"? Tindakan ini tidak bisa dibatalkan.`)) return;
+  if (!confirm(`Yakin mau hapus "${langText(p.name, 'id')}"? Tindakan ini tidak bisa dibatalkan.`)) return;
 
   const banner = document.getElementById('statusBanner');
   banner.className = 'status-msg info';
@@ -1181,7 +1196,7 @@ async function deleteProduct(id){
     productsData.products = productsData.products.filter(x => x.id !== id);
     const jsonStr = JSON.stringify(productsData, null, 2);
     const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
-    const result = await ghPutFile('data/products.json', base64Content, `Delete product: ${p.name}`, productsSha);
+    const result = await ghPutFile('data/products.json', base64Content, `Delete product: ${langText(p.name, 'id')}`, productsSha);
     productsSha = result.content.sha;
     banner.className = 'status-msg success';
     banner.textContent = 'produk dihapus.';

@@ -253,7 +253,7 @@
       <a href="#proyek" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.proyek">Project</a>
       <a href="#faq" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.faq">FAQ</a>
       <a href="#generator" class="fk-link" style="text-decoration:none; color:inherit;" data-i18n="nav.generator">Generator</a>
-      <a href="store.html" class="fk-link" style="text-decoration:none; color:#E15C3E; font-weight:700;" data-i18n="nav.instantFounder">Instant Founder</a>
+      <a href="store.html" class="fk-link" style="text-decoration:none; color:#E15C3E; font-weight:700;" data-i18n="nav.instantFounder">Founder Starterpack</a>
       <a href="#cta" class="fk-nav-cta" style="text-decoration:none; color:#FBF6EE; padding:10px 20px; border-radius:999px; font-weight:600; border:1px solid #FBF6EE33;" data-i18n="nav.ngobrol">Ngobrol</a>
     </div>
   </div>
@@ -336,7 +336,7 @@
         <div>
           <div style="display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:0.06em; color:#F2A623; background:#F2A62322; padding:6px 14px; border-radius:20px; margin-bottom:16px;">
             <span style="width:6px; height:6px; border-radius:50%; background:#F2A623;"></span>
-            <span data-i18n="banner.eyebrow">instant founder</span>
+            <span data-i18n="banner.eyebrow">founder starterpack</span>
           </div>
           <h2 style="font-family:'Fraunces',serif; font-weight:600; font-size:30px; color:#FFFCF5; margin:0 0 10px;" data-i18n="banner.h2">sudah dipaketkan lengkap, kamu tinggal jadi founder.</h2>
           <p style="font-size:15px; color:#FFFCF599; margin:0; max-width:460px; line-height:1.6;" data-i18n="banner.sub">website jadi, branding jadi, tone warna juga jadi. cocok buat portofolio yang keliatan niat atau bisnis yang pengen langsung jalan, tinggal pilih, kami dampingi sampai online.</p>
@@ -350,7 +350,7 @@
   <div style="max-width:1120px; margin:0 auto; padding: 0 26px 100px;" id="produkPreviewSection">
     <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:32px;">
       <div>
-        <div style="font-size:13px; font-weight:700; color:#FBF6EE99; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;" data-i18n="nav.instantFounder">Instant Founder</div>
+        <div style="font-size:13px; font-weight:700; color:#FBF6EE99; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;" data-i18n="nav.instantFounder">Founder Starterpack</div>
         <h2 class="fk-section-h2" style="font-family:'Fraunces',serif; font-weight:600; font-size:32px; color:#FBF6EE; margin:0 0 10px;" data-i18n="produk.h2">beberapa website yang tinggal kamu pakai buat jadi founder.</h2>
         <p style="font-size:15px; color:#FBF6EE99; margin:0; max-width:480px; line-height:1.6;" data-i18n="produk.sub">bukan mockup. ini produk siap pakai yang sudah kami rancang lengkap, dari desain sampai brand-nya.</p>
       </div>
@@ -374,10 +374,25 @@
   (async function(){
     const grid = document.getElementById('produkPreviewGrid');
     const section = document.getElementById('produkPreviewSection');
+    var fkCurrentLang = 'en';
+    try { fkCurrentLang = localStorage.getItem('fk-lang') || 'en'; } catch (e) {}
+    function pickLangText(field){
+      if (field == null) return '';
+      if (typeof field === 'string') return field;
+      return field[fkCurrentLang] || field.id || field.en || '';
+    }
+    function formatPriceLang(priceIDR, lang) {
+      var USD_RATE = 15700; var TRY_RATE = 490;
+      function thousands(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+      if (lang === 'en') return '$' + thousands(Math.round(priceIDR / USD_RATE));
+      if (lang === 'tr') return '\u20ba' + thousands(Math.round(priceIDR / TRY_RATE));
+      return 'Rp ' + thousands(priceIDR);
+    }
     function cardHTML(p){
       const catLabel = p.categoryLabel || p.category;
+      const pName = pickLangText(p.name);
       const thumbInner = p.thumbnail && !p.thumbnail.includes('placeholder')
-        ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:12px;color:#FBF6EE99;font-weight:600;&quot;>coming soon</span>'">`
+        ? `<img src="${p.thumbnail}" alt="${pName}" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:12px;color:#FBF6EE99;font-weight:600;&quot;>coming soon</span>'">`
         : `<span style="font-size:12px; color:#FBF6EE99; font-weight:600;">coming soon</span>`;
       return `
       <div class="fk-prod-card">
@@ -388,8 +403,8 @@
           </div>
           <div style="padding:18px 20px 20px;">
             <div style="font-size:11px; font-weight:700; color:#E15C3E; text-transform:uppercase; letter-spacing:0.05em;">${catLabel}</div>
-            <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:#FBF6EE; margin-top:6px;">${p.name}</div>
-            <div style="font-size:13px; color:#FBF6EE99; margin-top:10px; font-weight:700;">${p.priceLabel || ('Rp ' + Number(p.price).toLocaleString('id-ID'))}</div>
+            <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:#FBF6EE; margin-top:6px;">${pName}</div>
+            <div style="font-size:13px; color:#FBF6EE99; margin-top:10px; font-weight:700;">${formatPriceLang(p.price, fkCurrentLang)}</div>
           </div>
         </a>
       </div>`;
@@ -1428,14 +1443,14 @@
   var I18N = {
     id: {
       "nav.kenapa": "Kenapa", "nav.layanan": "Layanan", "nav.proses": "Proses", "nav.proyek": "Project",
-      "nav.faq": "FAQ", "nav.generator": "Generator", "nav.instantFounder": "Instant Founder", "nav.ngobrol": "Ngobrol",
+      "nav.faq": "FAQ", "nav.generator": "Generator", "nav.instantFounder": "Founder Starterpack", "nav.ngobrol": "Ngobrol",
       "hero.h1": "Semua bisa jadi founder.",
       "hero.sub": "Ide kamu, kami ubah jadi branding, website, dan produk yang beneran bisa dipakai, bukan sekadar wacana atau mockup doang.",
       "hero.ctaMain": "Ceritain Ide Kamu", "hero.ctaSecondary": "Lihat layanan →",
       "hero.trust": "Dibangun satu orang, satu keyakinan, ide kamu layak jadi kenyataan",
       "kenapa.eyebrow": "Kenapa Founderku",
       "kenapa.text": "Ide bagus jarang mati karena kurang niat. Yang bikin berhenti itu bagian yang paling sering dilewatin: eksekusi. Founderku ada buat nutup celah itu.",
-      "banner.eyebrow": "instant founder",
+      "banner.eyebrow": "founder starterpack",
       "banner.h2": "sudah dipaketkan lengkap, kamu tinggal jadi founder.",
       "banner.sub": "website jadi, branding jadi, tone warna juga jadi. cocok buat portofolio yang keliatan niat atau bisnis yang pengen langsung jalan, tinggal pilih, kami dampingi sampai online.",
       "banner.cta": "lihat katalog →",
@@ -1492,14 +1507,14 @@
     },
     en: {
       "nav.kenapa": "Why", "nav.layanan": "Services", "nav.proses": "Process", "nav.proyek": "Projects",
-      "nav.faq": "FAQ", "nav.generator": "Generator", "nav.instantFounder": "Instant Founder", "nav.ngobrol": "Chat",
+      "nav.faq": "FAQ", "nav.generator": "Generator", "nav.instantFounder": "Founder Starterpack", "nav.ngobrol": "Chat",
       "hero.h1": "Anyone can become a founder.",
       "hero.sub": "Your idea, turned into branding, a website, and a product people can actually use, not just talk or a mockup.",
       "hero.ctaMain": "Tell Us Your Idea", "hero.ctaSecondary": "See services →",
       "hero.trust": "Built by one person, one belief: your idea deserves to become real",
       "kenapa.eyebrow": "Why Founderku",
       "kenapa.text": "Good ideas rarely die from lack of will. What stops them is the part most people skip: execution. Founderku exists to close that gap.",
-      "banner.eyebrow": "instant founder",
+      "banner.eyebrow": "founder starterpack",
       "banner.h2": "already packaged in full, you just have to become the founder.",
       "banner.sub": "the website is done, the branding is done, the tone and colors are done too. great for a portfolio that shows real effort, or a business you want to launch right away, just pick one and we'll guide you until it's live.",
       "banner.cta": "browse catalog →",
@@ -1556,14 +1571,14 @@
     },
     tr: {
       "nav.kenapa": "Neden", "nav.layanan": "Hizmetler", "nav.proses": "Süreç", "nav.proyek": "Projeler",
-      "nav.faq": "SSS", "nav.generator": "Üretici", "nav.instantFounder": "Instant Founder", "nav.ngobrol": "Sohbet",
+      "nav.faq": "SSS", "nav.generator": "Üretici", "nav.instantFounder": "Founder Starterpack", "nav.ngobrol": "Sohbet",
       "hero.h1": "Herkes founder olabilir.",
       "hero.sub": "Fikrini, markaya, web sitesine ve gerçekten kullanılabilir bir ürüne dönüştürüyoruz, sadece laf ya da maket değil.",
       "hero.ctaMain": "Fikrini Anlat", "hero.ctaSecondary": "Hizmetlere bak →",
       "hero.trust": "Tek kişi, tek inançla kuruldu: fikrin gerçek olmayı hak ediyor",
       "kenapa.eyebrow": "Neden Founderku",
       "kenapa.text": "İyi fikirler nadiren isteksizlikten ölür. Onları durduran şey genelde atlanan kısım: uygulama. Founderku, o boşluğu kapatmak için var.",
-      "banner.eyebrow": "instant founder",
+      "banner.eyebrow": "founder starterpack",
       "banner.h2": "her şey hazır paketlendi, sana sadece founder olmak kaldı.",
       "banner.sub": "web sitesi hazır, marka kimliği hazır, renk tonu da hazır. gerçekten emek verilmiş görünen bir portfolyo veya hemen başlamak istediğin bir iş için ideal, birini seç, siteye alana kadar sana eşlik edelim.",
       "banner.cta": "kataloğa bak →",
