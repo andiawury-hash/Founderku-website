@@ -331,7 +331,9 @@ function applyProductStaticI18n() {
     var p = currentProduct;
     const catLabel = p.categoryLabel || p.category;
     breadcrumb.innerHTML = `<a href="store.html">${dict['breadcrumb.store']}</a><span class="sep">/</span><a href="store.html">${catLabel}</a><span class="sep">/</span><span class="current" style="text-transform:none;">${pickLangText(p.name)}</span>`;
-    document.getElementById('buyPriceNote').textContent = p.priceNote || dict['buy.priceNote'];
+    document.getElementById('buyTitle').textContent = pickLangText(p.name);
+    document.getElementById('buyPrice').textContent = getDisplayPrice(p, fkCurrentLang);
+    document.getElementById('buyPriceNote').textContent = dict['buy.priceNote'];
 
     const fullDescText = pickLangText(p.fullDescription) || pickLangText(p.shortDescription) || '';
     const descParts = fullDescText.split(/\s+-\s+/).map(s => s.trim()).filter(Boolean);
@@ -429,8 +431,6 @@ function applyProductStaticI18n() {
     }
 
     document.getElementById('buyCat').textContent = catLabel;
-    document.getElementById('buyTitle').textContent = pickLangText(p.name);
-    document.getElementById('buyPrice').textContent = getDisplayPrice(p, fkCurrentLang);
 
     const btnVisit = document.getElementById('btnVisit');
     if (p.liveUrl) {
