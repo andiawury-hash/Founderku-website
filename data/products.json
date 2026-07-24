@@ -3,7 +3,11 @@
     {
       "id": "tukarskill",
       "slug": "tukarskill",
-      "name": "TukarSkill - Platform Barter Skill Tanpa Bayar",
+      "name": {
+        "id": "TukarSkill - Platform Barter Skill Tanpa Bayar",
+        "en": "TukarSkill - Skill Barter Platform, No Cash Needed",
+        "tr": "TukarSkill - Nakitsiz Beceri Takas Platformu"
+      },
       "category": "platform-marketplace",
       "categoryLabel": "platform & marketplace",
       "price": 12000000,
@@ -70,7 +74,11 @@
     {
       "id": "motifa",
       "slug": "motifa",
-      "name": "Motifa - Website Generator Motif Nusantara Personal",
+      "name": {
+        "id": "Motifa - Website Generator Motif Nusantara Personal",
+        "en": "Motifa - Personalized Nusantara Motif Generator Website",
+        "tr": "Motifa - Kişisel Nusantara Motif Oluşturucu Web Sitesi"
+      },
       "category": "landing-page",
       "categoryLabel": "landing page",
       "price": 500000,
@@ -125,7 +133,11 @@
     {
       "id": "kelasin",
       "slug": "kelasin",
-      "name": "Kelasin - Platform Kelas Mikro 15 Menit dari Siapa Aja",
+      "name": {
+        "id": "Kelasin - Platform Kelas Mikro 15 Menit dari Siapa Aja",
+        "en": "Kelasin - 15-Minute Micro-Class Platform, From Anyone",
+        "tr": "Kelasin - Herkesten 15 Dakikalık Mikro Ders Platformu"
+      },
       "category": "platform-marketplace",
       "categoryLabel": "platform & marketplace",
       "price": 1800000,
@@ -177,7 +189,11 @@
     {
       "id": "lahirku",
       "slug": "lahirku",
-      "name": "Lahirku - Kartu Kelahiran Digital Berbasis Weton Jawa",
+      "name": {
+        "id": "Lahirku - Kartu Kelahiran Digital Berbasis Weton Jawa",
+        "en": "Lahirku - Digital Birth Card Based on Javanese Weton",
+        "tr": "Lahirku - Cava Weton'una Dayalı Dijital Doğum Kartı"
+      },
       "category": "platform-marketplace",
       "categoryLabel": "platform & marketplace",
       "price": 800000,
@@ -226,7 +242,11 @@
     {
       "id": "nomadbuds-web-app-cari-teman-traveling-lokal",
       "slug": "nomadbuds-web-app-cari-teman-traveling-lokal",
-      "name": "NomadBuds - Web App Cari Teman Traveling & Lokal",
+      "name": {
+        "id": "NomadBuds - Web App Cari Teman Traveling & Lokal",
+        "en": "NomadBuds - Web App to Find Travel & Local Friends",
+        "tr": "NomadBuds - Seyahat ve Yerel Arkadaş Bulma Web Uygulaması"
+      },
       "category": "landing-page",
       "categoryLabel": "landing page",
       "price": 500000,
